@@ -92,3 +92,47 @@ knitr::opts chunk$set(echo = TRUE)
 knitr::opts knit$set(root.dir =
 ”C:/Users/Tomas R. Tenreiro/Desktop/Experimental Catchment Cordoba 19 20” )
 ```
+
+## 1.5 Input material
+
+This section uploads all input material. In this particular case, we will work with satellite data
+(Sentinel-2), atmospherically corrected (and cloud cover < 4%), that was downloaded from Sentinel-
+HUB browser https://apps.sentinel-hub.com/. The script considers imagery from two growing seasons
+(i.e. 2017/18 and 2018/19). In order to explore spatial correlation between plant vigor and soil
+properties under rain-fed conditions, we focused on late phenological stages before crop senescence.
+First year imagery corresponds to a winter wheat crop and second year imagery corresponds to a
+rapeseed crop.
+
+```
+# Date 1
+Sentinel Red 19.04.2018 <- raster(”sentinel/R analysis/Sentinel Red 19.04.2018.tiff”)
+Sentinel NIR 19.04.2018 <- raster(”sentinel/R analysis/Sentinel NIR 19.04.2018.tiff”)
+# Date 2
+Sentinel Red 07.05.2018 <- raster(”sentinel/R analysis/Sentinel Red 07.05.2018.tiff”)
+Sentinel NIR 07.05.2018 <- raster(”sentinel/R analysis/Sentinel NIR 07.05.2018.tiff”)
+# Date 3
+Sentinel Red 14.05.2018 <- raster(”sentinel/R analysis/Sentinel Red 14.05.2018.tiff”)
+Sentinel NIR 14.05.2018 <- raster(”sentinel/R analysis/Sentinel NIR 14.05.2018.tiff”)
+# Date 4
+Sentinel Red 16.06.2018 <- raster(”sentinel/R analysis/Sentinel Red 16.06.2018.tiff”)
+Sentinel NIR 16.06.2018 <- raster(”sentinel/R analysis/Sentinel NIR 16.06.2018.tiff”)
+# Date 5
+Sentinel Red 04.04.2019 <- raster(”sentinel/R analysis/Sentinel Red 04.04.2019.tiff”)
+Sentinel NIR 04.04.2019 <- raster(”sentinel/R analysis/Sentinel NIR 04.04.2019.tiff”)
+# Date 6
+Sentinel Red 14.04.2019 <- raster(”sentinel/R analysis/Sentinel Red 14.04.2019.tiff”)
+Sentinel NIR 14.04.2019 <- raster(”sentinel/R analysis/Sentinel NIR 14.04.2019.tiff”)
+# Date 7
+Sentinel Red 27.04.2019 <- raster(”sentinel/R analysis/Sentinel Red 27.04.2019.tiff”)
+Sentinel NIR 27.04.2019 <- raster(”sentinel/R analysis/Sentinel NIR 27.04.2019.tiff”)
+# Date 8
+Sentinel Red 14.05.2019 <- raster(”sentinel/R analysis/Sentinel Red 14.05.2019.tiff”)
+Sentinel NIR 14.05.2019 <- raster(”sentinel/R analysis/Sentinel NIR 14.05.2019.tiff”)
+```
+
+
+
+
+
+
+
