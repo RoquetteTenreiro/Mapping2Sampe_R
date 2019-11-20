@@ -369,6 +369,7 @@ NDVI points 4 <- tm shape(NDVI vector 16.06.2018) + tm dots(col=”NDVI 16.06.20
 # Display facets
 tmap arrange(NDVI points 1, NDVI points 2, NDVI points 3, NDVI points 4, ncol=4)
 ```
+![Image description](facets_2018.png)
 
 The previous script is a ’tmap-element’ that specifies facets (small multiples). Small multiples
 can be created in two ways: 1) by specifying the by argument with one or two variable names, by which the data is grouped, 2) by specifying multiple variable names in any of the aesthetic argument
@@ -408,6 +409,7 @@ NDVI points 8 <- tm shape(NDVI vector 14.05.2019) + tm dots(col=”NDVI 14.05.20
 # Display facets
 tmap arrange(NDVI points 5, NDVI points 6, NDVI points 7, NDVI points 8, ncol=4)
 ```
+![Image description](facets_2019.png)
 
 ## 3 Geo-spatial analysis of field data
 
