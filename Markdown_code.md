@@ -198,11 +198,14 @@ Note: ”ncol” means the number of columns up to a maximum limit of 4 features
 ```
 tmap arrange(NDVI 19.04.2018, NDVI 07.05.2018, NDVI 14.05.2018, NDVI 16.06.2018, nncol=2)
 ```
+![Image description](satNDVI_1.jpg)
+
 Second for 2019:
 
 ```
 tmap arrange(NDVI 04.04.2019, NDVI 14.04.2019, NDVI 27.04.2019, NDVI 14.05.2019, ncol=2)
 ```
+![Image description](satNDVI_2.jpg)
 
 ### 2.4 Upload the field vector for clip operations
 
