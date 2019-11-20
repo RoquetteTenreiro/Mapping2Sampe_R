@@ -936,6 +936,8 @@ map Probes <- tm shape(mergedata) + tm dots(col = ”Probes”, palette = mycols
 tmap arrange(map MZ, map Probes, ncol=2)
 ```
 Check final result at:
+![Image description](FinalMap.jpg)
+
 > https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/FinalMap.jpg
 
 ## 5 Additional reading material
