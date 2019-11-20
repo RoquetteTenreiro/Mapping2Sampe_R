@@ -717,3 +717,76 @@ data.pca$rotation
 
 > Sand; 0.2984024; 0.15961924
 
+According to the new PCA, the two main components are capable to explain about 57% of total
+variation. It is possible to observe that ECa2 is negatively correlated to mean NDVI for both PC1
+and PC2 (i.e. similar absolute value of the scores but different signals). Elevation is also correlated
+with mean NDVI (mostly in PC2) and also to both NDVI mean 2018 and 2019 (in PC1). Elevation
+is positively correlated to NDVI for 2018 and negatively correlated to NDVI for 2019. This is likely
+to be explained by differences in regard to rainfall. The most important variables are NDVI (mean of
+the two years as well as the means of each year), Elevation and ECa2. Therefore, the classification
+of management zones will take these three types of variables into account.
+
+## 4 Management zones & sampling points
+
+This stage takes into consideration the available amount of soil moisture probes (N) to be used.
+In real decision situations, farmers and researchers, due to financial constraints, are limited by the
+amount of technology available. In our case, we have 10 capacitance probes (N=10) to use, and we
+intend to guarantee at least 2-3 repetitions per zone, which means that we will be able to consider
+a maximum number of 3-4 measuring zones.
+
+### 4.1 Minimum amount of management zones
+
+Here we conduct an analysis with library(cluster) to check whether the amount of clusters considered
+is representative enough of our spatial variation.
+
+```
+# Upload library cluster
+library(cluster)
+# I will work with Elevation, ECa2 and the means of NDVI
+data <- dataframe[c(9,12,17:19)]
+fviz nbclust(dataframe, FUN = hcut, method = ”wss”)
+```
+The proposed amount of 3-4 zones seems representative enough since adding more classes would
+not low the total within sum of square of this classification.
+
+### 4.2 Regression analysis
+
+In this section we aim to confirm weather the variation of physical properties has an agronomic
+meaning. First, Elevation and ECa2 are plotted against NDVI. The effect of the year is quite
+visible in the relation Elevation x NDVI due to the large differences observed in regard to rainfall.
+As a consequence, we plot this relation for each year separately. NDVI correlates to Elevation
+through a quadratic form that seems to change it’s concavity orientation according to the amount
+of rainfall. However the regression keeps a comparable shape as the turning point (where first
+oder derivative equals zero) is obtained practically at the same elevation (175.54 m). This value (elevation-threshold) corresponds to a threshold value from which the response curve changes the
+slope signal. Mathematically, this threshold is estimated by solving the zeros of the first order
+derivative. 
+
+```
+ggplot(data, aes(x=Elevation, y=ndvi 2018)) + geom point(shape=21, size=2, stroke=1.5, fill=”darkslategray3”) +
+# Set static color and size for points geom smooth(method=”lm”, formula = ypoly(x,2,raw=T), col=”red”) + #
+change the color of line stat poly eq(formula = ypoly(x,2,raw=T), aes(label = paste(..eq.label.., ..rr.label.., sep =
+””)), parse = TRUE) + scale colour brewer(palette = ”Set1”) + coord cartesian(xlim=c(160, 200), ylim=c(0.3,
+1)) + geom vline(aes(xintercept=174.78), color=”blue”, linetype=”dashed”, size=1) + labs(title=”Elevation vs.
+mean NDVI”, subtitle=”How does NDVI correlate to Elevation?”, y=”NDVI”, x=”Elevation (m)”, caption=”NDVI
+mean (9.5 ha)”)
+ggplot(data, aes(x=Elevation, y=ndvi 2019)) + geom point(shape=21, size=2, stroke=1.5, fill=”goldenrod”)
++ # Set static color and size for points geom smooth(method=”lm”, formula = ypoly(x,2,raw=T),
+col=”red”) + # change the color of line stat poly eq(formula = ypoly(x,2,raw=T), aes(label =
+paste(..eq.label.., ..rr.label.., sep = ””)), parse = TRUE) + scale colour brewer(palette = ”Set1”) +
+geom vline(aes(xintercept=176.31), color=”blue”, linetype=”dashed”, size=1) + coord cartesian(xlim=c(160, 200),
+ylim=c(0.3, 1)) + labs(title=”Elevation vs. mean NDVI”, subtitle=”How does NDVI correlate to Elevation?”,
+y=”NDVI”, x=”Elevation (m)”, caption=”NDVI mean (9.5 ha)”)
+ggplot(data, aes(x=ECa2, y=ndvi)) + geom point(shape=21, size=2, stroke=1.5, fill=”dodgerblue”) + # Set static
+color and size for points geom smooth(method=”lm”, formula = yx, col=”red”) + stat poly eq(formula = yx,
+aes(label = paste(..eq.label.., ..rr.label.., sep = ””)), parse = TRUE) + scale colour brewer(palette = ”Set1”)
++ coord cartesian(xlim=c(0.3, 1.25), ylim=c(0.3, 1)) + labs(title=”Eca vs. mean NDVI”, subtitle=”How does NDVI
+correlate to ECa?”, y=”NDVI”, x=”Deep Eca (dS/m)”, caption=”NDVI mean (9.5 ha)”)
+# solve 1st derivative for E x NDVI 2018
+deriv( 7.65-(0.0797*x)+(0.000228*(x2)), ”x”)
+a = (0.0797 / 0.000228) / 2 # 174.78
+# solve 1st derivative for E x NDVI 2019
+deriv( -10.6-(0.128*x)+(0.000363*(x2)), ”x”)
+b = (0.128 / 0.000363) / 2 # 176.31
+Elevation threshold = (a+b)/2
+Elevation threshold # 175.54 m
+```
