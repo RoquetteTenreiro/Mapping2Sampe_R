@@ -5,8 +5,9 @@ R-script to map points for installing moisture probes
 
 > Author: Tomás Roquette Tenreiro
 
-Institute for Sustainable Agriculture (IAS-CSIC)
-Córdoba, 2019
+> Institute for Sustainable Agriculture (IAS-CSIC)
+
+> Córdoba, 2019
 
 ## 1 Introduction
 
