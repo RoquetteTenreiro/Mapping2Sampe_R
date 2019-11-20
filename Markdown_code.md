@@ -1,6 +1,7 @@
 # Mapping 2 Sample
-
 R-script to map points for installing moisture probes 
+
+![Image description](IMG_1918.JPG)
 
 > Author: Tomás Roquette Tenreiro
 
