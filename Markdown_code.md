@@ -763,30 +763,171 @@ derivative.
 
 ```
 ggplot(data, aes(x=Elevation, y=ndvi 2018)) + geom point(shape=21, size=2, stroke=1.5, fill=”darkslategray3”) +
-# Set static color and size for points geom smooth(method=”lm”, formula = ypoly(x,2,raw=T), col=”red”) + #
-change the color of line stat poly eq(formula = ypoly(x,2,raw=T), aes(label = paste(..eq.label.., ..rr.label.., sep =
-””)), parse = TRUE) + scale colour brewer(palette = ”Set1”) + coord cartesian(xlim=c(160, 200), ylim=c(0.3,
+# Set static color and size for points geom smooth(method=”lm”, formula = y~poly(x,2,raw=T), col=”red”) + #
+change the color of line stat poly eq(formula = y~poly(x,2,raw=T), aes(label = paste(..eq.label.., ..rr.label.., sep =
+”~~~”)), parse = TRUE) + scale colour brewer(palette = ”Set1”) + coord cartesian(xlim=c(160, 200), ylim=c(0.3,
 1)) + geom vline(aes(xintercept=174.78), color=”blue”, linetype=”dashed”, size=1) + labs(title=”Elevation vs.
 mean NDVI”, subtitle=”How does NDVI correlate to Elevation?”, y=”NDVI”, x=”Elevation (m)”, caption=”NDVI
 mean (9.5 ha)”)
+
 ggplot(data, aes(x=Elevation, y=ndvi 2019)) + geom point(shape=21, size=2, stroke=1.5, fill=”goldenrod”)
-+ # Set static color and size for points geom smooth(method=”lm”, formula = ypoly(x,2,raw=T),
-col=”red”) + # change the color of line stat poly eq(formula = ypoly(x,2,raw=T), aes(label =
-paste(..eq.label.., ..rr.label.., sep = ””)), parse = TRUE) + scale colour brewer(palette = ”Set1”) +
++ # Set static color and size for points geom smooth(method=”lm”, formula = y~poly(x,2,raw=T),
+col=”red”) + # change the color of line stat poly eq(formula = y~poly(x,2,raw=T), aes(label =
+paste(..eq.label.., ..rr.label.., sep = ”~~~”)), parse = TRUE) + scale colour brewer(palette = ”Set1”) +
 geom vline(aes(xintercept=176.31), color=”blue”, linetype=”dashed”, size=1) + coord cartesian(xlim=c(160, 200),
 ylim=c(0.3, 1)) + labs(title=”Elevation vs. mean NDVI”, subtitle=”How does NDVI correlate to Elevation?”,
 y=”NDVI”, x=”Elevation (m)”, caption=”NDVI mean (9.5 ha)”)
+
 ggplot(data, aes(x=ECa2, y=ndvi)) + geom point(shape=21, size=2, stroke=1.5, fill=”dodgerblue”) + # Set static
-color and size for points geom smooth(method=”lm”, formula = yx, col=”red”) + stat poly eq(formula = yx,
-aes(label = paste(..eq.label.., ..rr.label.., sep = ””)), parse = TRUE) + scale colour brewer(palette = ”Set1”)
+color and size for points geom smooth(method=”lm”, formula = y~x, col=”red”) + stat poly eq(formula = y~x,
+aes(label = paste(..eq.label.., ..rr.label.., sep = ”~~~”)), parse = TRUE) + scale colour brewer(palette = ”Set1”)
 + coord cartesian(xlim=c(0.3, 1.25), ylim=c(0.3, 1)) + labs(title=”Eca vs. mean NDVI”, subtitle=”How does NDVI
 correlate to ECa?”, y=”NDVI”, x=”Deep Eca (dS/m)”, caption=”NDVI mean (9.5 ha)”)
+
 # solve 1st derivative for E x NDVI 2018
-deriv( 7.65-(0.0797*x)+(0.000228*(x2)), ”x”)
+deriv(~ 7.65-(0.0797*x)+(0.000228*(x2)), ”x”)
 a = (0.0797 / 0.000228) / 2 # 174.78
+
 # solve 1st derivative for E x NDVI 2019
 deriv(~ -10.6-(0.128*x)+(0.000363*(x2)), ”x”)
 b = (0.128 / 0.000363) / 2 # 176.31
+
 Elevation threshold = (a+b)/2
+
 Elevation threshold # 175.54 m
 ```
+Once confirmed the correlation between soil physical properties (Elevation, ECa2) and agronomic
+measures (in this case the annual means of NDVI), a classification algorithm is performed in order
+to cluster four management zones.
+
+### 4.3 Clustering for management zone delineation
+
+In this section we apply a clustering algorithm for classification of management zones (i.e. k-means
+clustering). The clustering process employs only 4 variables (Elevation, ECa2 and the means of
+NDVI for both 2018 and 2019). The dataset contains features varying in different magnitudes,
+units and ranges (e.g. Elevation in units of meters, both NDVI and ECa varying in decimals, NDVI
+unitless, ECa in dS/m). Since computation uses an eucledian distance between data points this
+must considerably affect our results. In order to solve this issue, we must scale our data by applying
+the R function scale() .
+
+For more information related to k-Means and scaling features, please check:
+
+- https://uc-r.github.io/kmeans clustering
+
+- https://becominghuman.ai/demystifying-feature-scaling-baff53e9b3fd
+
+```
+library(cluster) # for clustering algorithms
+
+# Subset dataframe
+data <- dataframe[c(9,12,16:19)]
+df <- data
+
+# Scale variables Elevation, ECa2, NDVI mean, NDVI 2018, NDVI 2019
+df.stand <- scale(df[,c(1,2,5:6)]) # For Elevation, ECa2, NDVI 2018 and NDVI 2019
+
+# To minimize randomness set.seed(125)
+cluster <- kmeans(df.stand, 4) # The K-Means Algorithm
+df$cluster <- cluster$cluster
+
+# Plot the cluster
+fviz cluster(cluster, data = df.stand)
+```
+Data is clustered according to the selected principal components and the ’df’ data frame is
+merged with the shapefile MZ joined by the attribute ID.
+
+```
+# Add clusters to spatial data
+rm(mergedata)
+mergedata <- merge(x = MZ joined, y = df, by = ”ID”)
+
+# Recall data
+names(mergedata)[names(mergedata) == ”cluster”] <- ”ZONE”
+names(mergedata)[names(mergedata) == ”Elevation.y”] <- ”Elevation”
+names(mergedata)[names(mergedata) == ”ECa2.y”] <- ”ECa2”
+names(mergedata)[names(mergedata) == ”ndvi.y”] <- ”NDVI mean”
+mergedata$ZONE[mergedata$ZONE == ”1”] <- ”A”
+mergedata$ZONE[mergedata$ZONE == ”2”] <- ”B”
+mergedata$ZONE[mergedata$ZONE == ”3”] <- ”C”
+mergedata$ZONE[mergedata$ZONE == ”4”] <- ”D”
+
+# Create a color palette
+mycols <- c(”#3CB371”, ”#7B68EE”, ”#FFA07A”, ”#FFD700”)
+
+# Prepare maps
+map MZ <- tm shape(mergedata) + tm dots(col = ”ZONE”, palette = ”mycols”, n=5) + tm style(”cobalt”)
+map Elevation <- tm shape(mergedata) + tm dots(col = ”Elevation”, palette = ”Spectral”, n=5) +
+tm style(”cobalt”)
+map ECa <- tm shape(mergedata) + tm dots(col = ”ECa2”, palette = ”Reds”, n=5) + tm style(”cobalt”)
+map NDVI <- tm shape(mergedata) + tm dots(col = ”NDVI mean”, palette = ”YlGn”, n=5) + tm style(”cobalt”)
+
+# Display facets
+tmap arrange(map MZ, map Elevation, map ECa, map NDVI, ncol=4)
+```
+
+### 4.4 Representative points for sampling
+
+Considering the correlation between ECa2 and NDVI, the selection of representative points for
+sampling is done through an analysis of ECa histograms. The idea is to select the most representative
+ranges of values from density plots for each management zone.
+
+```
+library(RColorBrewer)
+# stack density plot
+
+g <- ggplot(mergedata, aes(x = ECa2, fill=Zone)) + geom density(position=”identity”, alpha=0.6) +
+scale x continuous(name = ”Density plot of NDVI”, breaks = seq(0, 1, 0.2), limits=c(0.3, 1)) +
+scale y continuous(name = ”Density”) + ggtitle(”Density plot of mean NDVI”) + theme bw() + theme(plot.title
+= element text(size = 14, family = ”Tahoma”, face = ”bold”), text = element text(size = 12, family = ”Tahoma”))
+
+g <- g + scale fill discrete(name=’ZONE’,labels=c(”A”, ”B”, ”C”, ”D”))
+g <- g + scale fill brewer(palette=”Accent”)
+
+# Vertical dashed lines - intervals of ECa to select representative points
+
+g <- g + geom vline(aes(xintercept=0.72), color=”gold2”, linetype=”dashed”, size=1) +
+geom vline(aes(xintercept=0.75), color=”gold2”, linetype=”dashed”, size=1)
+g <- g + geom vline(aes(xintercept=0.58), color=”darkorchid1”, linetype=”dashed”, size=1) +
+geom vline(aes(xintercept=0.63), color=”darkorchid1”, linetype=”dashed”, size=1)
+g <- g + geom vline(aes(xintercept=0.46), color=”forestgreen”, linetype=”dashed”, size=1) +
+geom vline(aes(xintercept=0.48), color=”forestgreen”, linetype=”dashed”, size=1)
+g <- g + geom vline(aes(xintercept=0.43), color=”darksalmon”, linetype=”dashed”, size=1) +
+geom vline(aes(xintercept=0.45), color=”darksalmon”, linetype=”dashed”, size=1)
+g
+```
+### 4.5 Mapping 2 sample
+
+The following map indicates the proposed points to install soil moisture probes. Each colored
+dot represents a point with maximum and relatively equal representativeness of the corresponding
+management zone (different colors indicate different management zones). The installation should
+take into account the farming traffic directions in order to minimize disturbance. We have 10 probes,
+2 will be installed in zone B, 2 in zone A locations and 3 probes in management zones C and D (all
+aligned with the tractor rows).
+
+```
+# Define sampling points
+mergedata$Probes <- ”0 NO Probe”
+mergedata$Probes[mergedata$ZONE == ”A” & mergedata$ECa2 > 0.46 & mergedata$ECa2 < 0.48] <- ”A”
+mergedata$Probes[mergedata$ZONE == ”B” & mergedata$ECa2 > 0.58 & mergedata$ECa2 < 0.63] <- ”B”
+mergedata$Probes[mergedata$ZONE == ”C” & mergedata$ECa2 > 0.43 & mergedata$ECa2 < 0.45] <- ”C”
+mergedata$Probes[mergedata$ZONE == ”D” & mergedata$ECa2 > 0.72 & mergedata$ECa2 0.75] <- ”D”
+
+mycols <- c(”3CB371”, ”7B68EE”, ”FFA07A”, ”FFD700”)
+map MZ <- tm shape(mergedata) + tm dots(col = ”ZONE”, palette = mycols, n=5) + tm style(”cobalt”)
+
+mycols <- c(”F5F5F5”, ”3CB371”, ”7B68EE”, ”FFA07A”, ”FFD700”)
+map Probes <- tm shape(mergedata) + tm dots(col = ”Probes”, palette = mycols, n=5) + tm style(”cobalt”)
+
+# Display facets
+tmap arrange(map MZ, map Probes, ncol=2)
+```
+
+## 5 Additional reading material
+
+- https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/
+
+- https://github.com/RoquetteTenreiro/SDAE R lecture
+
+- https://geocompr.robinlovelace.net/
+
+- https://www.rspatial.org/index.html
