@@ -831,7 +831,7 @@ the R function scale() .
 
 For more information related to k-Means and scaling features, please check:
 
-- https://uc-r.github.io/kmeans clustering
+- https://uc-r.github.io/kmeans_clustering
 
 - https://becominghuman.ai/demystifying-feature-scaling-baff53e9b3fd
 
