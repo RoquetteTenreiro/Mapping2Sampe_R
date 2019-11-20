@@ -2,7 +2,7 @@
 
 R-script to map points for installing moisture probes 
 
-> by Tomás Roquette Tenreiro
+> Author: Tomás Roquette Tenreiro
 
 Institute for Sustainable Agriculture (IAS-CSIC)
 Córdoba, 2019
@@ -540,4 +540,88 @@ pH map <- tm shape(MZ joined) + tm dots(col = ”pH”, palette = ”Purples”,
 
 # Display facets
 tmap arrange(Clay map, Sand map, pH map, ncol=3)
+```
+
+The field is characterized by a lower variation of clay and sandy content. Clay content varies
+from 40 to 52% and sandy content from 10 to 26%. We don’t expect texture to be a major driver
+of crop spatial heterogeneity. Therefore, we focused mostly on topography.
+
+```
+# Estimate CV cv Clay = cv(MZ joined$Clay)
+cv Sand = cv(MZ joined$Sand)
+cv pH = cv(MZ joined$pH)
+cv ECa1 = cv(MZ joined$ECa1)
+cv ECa2 = cv(MZ joined$ECa2)
+cv O = cv(MZ joined$Orientation)
+cv E = cv(MZ joined$Elevation)
+cv NDVI 2018 = cv(MZ joined$NDVI 07.05.2018)
+cv NDVI 2019 = cv(MZ joined$NDVI 14.04.2019)
+
+# Print results:
+cv Clay = 6.65 %;
+cv Sand = 25.97 % ;
+cv pH = 3.32 % ;
+cv ECa1 = 39.36 % ;
+cv ECa2 = 26.76 % ;
+cv O = 61.79 % ;
+cv E = 4.86 % ;
+cv NDVI 2018 = 11.79 % ;
+cv NDVI 2019 = 13.12 %
+
+# Apparently the most variable properties are % Sand, ECa and orientation; but be careful when interpreting ’cv’ of
+spatial data; orientation for instance, which has the largest cv is expressed in degrees, which means that values close
+to zero represent similar orientations to values close to 360, in this sense, a large ’cv’ does not necessarily imply a
+large variation.
+```
+
+### 3.5 Principal components (filtering and grouping variables)
+
+This section addresses the importance of reducing dimensions. What is the minimal amount of
+properties that we must take into account to perform a satisfactory classification? At this stage, we
+have a shapefile with 15 different continuous variables (8 different dates of NDVI for two cropping
+years, ECa1, ECa2, pH, Sand, Clay, Orientation and Elevation). First we conduct a Principal Component
+Analysis (PCA) to understand the proportion of variation for each component and to select
+the most important and correlated variables. A PCA does not discard any samples or characteristics
+(variables). Instead, it reduces the overwhelming number of dimensions by constructing principal
+components (PC).
+
+```
+MZ joined$ID <- seq.int(nrow(MZ joined))
+dataframe = fortify(MZ joined)
+dataframe$geometry <- NULL
+dataframe <- dataframe[c(1:12,15:17,20)]
+data.pca <- prcomp(dataframe[,c(1:15)], scale = TRUE)
+summary(data.pca)
+autoplot(data.pca, colour = ’white’, loadings = TRUE, loadings.label = TRUE, loadings.label.size = 3.5)
+```
+
+In this particular case, the analysis aims to define management zones which are zones with homogeneous
+response curves of plant vigor (NDVI) to certain properties (ECa, Elevation, Orientation).
+From our PCA, it is possible to observe that in terms of NDVI two dates have a relatively low
+proportion of variance (i.e. NDVI 16.06.2018 and NDVI 14.05.2019), which are therefore ignored.
+From the PCA plot, we observe a strong correlation in the first principal component (PC1)
+between Elevation and NDVI for both years. The correlation is positive for 2018 and negative for
+2019 but the PC score is comparable (about 0.3, slightly less for NDVI 2019). The euclidean space
+represented in the PCA plot indicates that Orientation might also be correlated to the variation of NDVI 2018 since both reveal similar PC2 scores. In the case of ECa, ECa1 is better correlated to
+NDVI than ECa2 (in PC2 as well). The correlation is positive in 2019 and negative in 2018. In
+general, we may note a complete contrast between 2018 and 2019 imagery that is likely to be more
+associated to the year conditions than to the crop species. Let’s confirm it by considering the annual distribution of rainfall for each year.
+
+```
+# Import rainfall data for 2017/18 and 2018/19 (Data reported from October to September)
+rm(Rain)
+
+Rain <- read.csv(file=”Las300 Rainfall 2018 19.csv”, header=TRUE, sep=”,”)
+
+# Prepare plot
+rain 2018 <- subset(Rain, Year == 1)
+rain 2019 <- subset(Rain, Year == 2)
+
+graph r 2018 <- ggplot(rain 2018, aes(x=Month number, y=P)) + geom point(shape=21, size=2, stroke=1.5,
+fill=”darkslateblue”) + # Set static color and size for points
+geom line(col=”blue”) + scale colour brewer(palette = ”Set1”) + coord cartesian(xlim=c(1, 11.9), ylim=c(0, 300))
++ labs(title=”2018 Rainfall”, subtitle=”Monthly values”, y=”Precipitation (mm)”, x=”Month number (Month 1 =
+October 2017)”, caption=”Hydrologic Year from October - September”)
+
+graph r 2018
 ```
