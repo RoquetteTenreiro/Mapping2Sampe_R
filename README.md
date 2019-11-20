@@ -79,5 +79,16 @@ library(markdown)
 library(tinytex)
 library(lmtest)
 ```
+## 1.4 Initial details - working directory
 
+In this section we set initial details to specify the working directory; in this particular case the analysis
+was linked to the internal folder Experimental Catchment Cordoba 19 20 where input and output
+data is saved. To run this code please specify the working directory where your input files are saved.
 
+```
+rm(list=ls())
+getwd()
+knitr::opts chunk$set(echo = TRUE)
+knitr::opts knit$set(root.dir =
+”C:/Users/Tomas R. Tenreiro/Desktop/Experimental Catchment Cordoba 19 20” )
+```
