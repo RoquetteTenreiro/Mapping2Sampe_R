@@ -14,7 +14,7 @@ The following R-script aims to describe an analytical procedure that combined mu
 in order to classify management zones for sampling and soil moisture probe installation. The main
 goal is to distinguish management zones based on physical (i.e. orientation, elevation, texture,
 ECa), chemical (pH), and biological (plant vigor) properties within a crop field. The selected field is
-about 9.5 ha, located in the arable region of C´ordoba. This document aims also to deliver a script
+about 9.5 ha, located in the arable region of Cordoba. This document aims also to deliver a script
 that can be adjusted to similar analyses or function as a guide to conduct geospatial analysis with
 R. The reader can use this document both as a dissemination and a decision supporting tool.
 
