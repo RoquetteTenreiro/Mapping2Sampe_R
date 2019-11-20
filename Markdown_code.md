@@ -324,11 +324,17 @@ It is possible to zoom each facet separately in R-studio and move the correspond
 ```
 tmap arrange(masked 1, masked 2, masked 3, masked 4, ncol=2)
 ```
+
+![Image description](Dynamic_2018.png)
+
 ### 2.9 Print NDVI masked map for 2019
 
 ```
 tmap arrange(masked 5, masked 6, masked 7, masked 8, ncol=2)
 ```
+
+![Image description](Dynamic_2019.png)
+
 
 ### 2.10 Display facets for 2018
 
