@@ -28,27 +28,48 @@ R. The reader can use this document both as a dissemination and a decision suppo
 The first step consists on updating all necessary libraries for this analysis.
 
 **install.packages(”rmarkdown”)
+
 install.packages(”dplyr”)
+
 install.packages(”plyr”)
+
 install.packages(”reshape2”)
+
 install.packages(”agricolae”)
+
 install.packages(”quantreg”)
+
 install.packages(”ploty”)
+
 install.packages(”sf”)
+
 install.packages(”raster”)
+
 install.packages(”spData”)
+
 install.packages(’spDataLarge’, repos=’https://nowosad.github.io/drat/’, type=’source’)
+
 install.packages(”gridExtra”)
+
 install.packages(”RColorBrewer”)
+
 install.packages(”root.dir”)
+
 install.packages(”tidyverse”)
+
 install.packages(”ggplot2”)
+
 install.packages(”wesanderson”)
+
 install.packages(”ggpmisc”)
+
 install.packages(”knitr”)
+
 install.packages(”installr”)
+
 install.packages(”lmtest”, repos = ”http://cran.us.r-project.org”)
-install.packages(”tinytex”)**
+
+install.packages(”tinytex”)
 
 The second step consists on calling all libraries to the script.
 
