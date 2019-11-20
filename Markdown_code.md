@@ -1,7 +1,8 @@
-# Mapping2Sampe_R
+# Mapping 2 Sample
+
 R-script to map points for installing moisture probes 
 
-by Tomás Roquette Tenreiro
+> by Tomás Roquette Tenreiro
 
 Institute for Sustainable Agriculture (IAS-CSIC)
 Córdoba, 2019
