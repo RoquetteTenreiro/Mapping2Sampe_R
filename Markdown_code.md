@@ -883,6 +883,8 @@ df$cluster <- cluster$cluster
 # Plot the cluster
 fviz cluster(cluster, data = df.stand)
 ```
+![Image description](KmeansPlot.jpg)
+
 Data is clustered according to the selected principal components and the ’df’ data frame is
 merged with the shapefile MZ joined by the attribute ID.
 
@@ -914,7 +916,7 @@ map NDVI <- tm shape(mergedata) + tm dots(col = ”NDVI mean”, palette = ”Yl
 # Display facets
 tmap arrange(map MZ, map Elevation, map ECa, map NDVI, ncol=4)
 ```
-
+![Image description](Cluster_map.jpg)
 ### 4.4 Representative points for sampling
 
 Considering the correlation between ECa2 and NDVI, the selection of representative points for
