@@ -439,7 +439,6 @@ include graphics(img4 path)
 include graphics(img5 path)
 include graphics(img6 path)
 ```
-Please check:
 
 ![Image description](1.jpg)
 ![Image description](2.jpg)
