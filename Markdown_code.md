@@ -442,19 +442,11 @@ include graphics(img6 path)
 Please check:
 
 ![Image description](1.jpg)
-
-> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/1.jpg
-
-> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/2.jpg
-
-> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/3.jpg
-
-> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/4.jpg
-
-> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/5.jpg
-
-> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/6.jpg
-
+![Image description](2.jpg)
+![Image description](3.jpg)
+![Image description](4.jpg)
+![Image description](5.jpg)
+![Image description](6.jpg)
 
 ### 3.2 Upload soil physical and chemical data
 
@@ -543,7 +535,19 @@ names(Sampling vector)[names(Sampling vector) == ”PH”] <- ”pH”
 names(Sampling vector)[names(Sampling vector) == ”ARENA”] <- ”Sand”
 ```
 
+```
+# A few sampling photos
+# Define file path
+img7 path <- ”sentinel/R analysis/Pictures Sampling/7.png”
+img8 path <- ”sentinel/R analysis/Pictures Sampling/8.png”
+# Display pictures
+include graphics(img7 path)
+include graphics(img8 path)
 Here we interpolate sampling data by applying a spatial join through ’st nearest feature’.
+```
+
+![Image description](7.jpg)
+![Image description](8.jpg)
 
 ```
 # Spatial join
