@@ -578,6 +578,7 @@ pH map <- tm shape(MZ joined) + tm dots(col = ”pH”, palette = ”Purples”,
 # Display facets
 tmap arrange(Clay map, Sand map, pH map, ncol=3)
 ```
+![Image description](Sampling_maps.jpg)
 
 The field is characterized by a lower variation of clay and sandy content. Clay content varies
 from 40 to 52% and sandy content from 10 to 26%. We don’t expect texture to be a major driver
@@ -631,6 +632,7 @@ data.pca <- prcomp(dataframe[,c(1:15)], scale = TRUE)
 summary(data.pca)
 autoplot(data.pca, colour = ’white’, loadings = TRUE, loadings.label = TRUE, loadings.label.size = 3.5)
 ```
+![Image description](PCA_autoplot.jpg)
 
 In this particular case, the analysis aims to define management zones which are zones with homogeneous
 response curves of plant vigor (NDVI) to certain properties (ECa, Elevation, Orientation).
@@ -665,7 +667,10 @@ graph r 2018
 # Cumulative late winter and spring rainfall: 480.5 mm
 rain 2018$P[rain 2018$Month == ”February”] + rain 2018$P[rain 2018$Month == ”March”] +
 rain 2018$P[rain 2018$Month == ”April”]
+```
+![Image description](Rain2018.jpg)
 
+```
 graph r 2019 <- ggplot(rain 2019, aes(x=Month number, y=P)) + geom point(shape=21, size=2, stroke=1.5,
 fill=”darkslateblue”) +
 geom line(col=”blue”) + scale colour brewer(palette = ”Set1”) + coord cartesian(xlim=c(1, 11.9), ylim=c(0, 300))
@@ -679,6 +684,7 @@ rain 2019$P[rain 2019$Month == ”April”]
 
 # Cumulative rainfall (Feb-April 2019): 78 mm
 ```
+![Image description](Rain2019.jpg)
 
 There is a clear contrast between 2018 and 2019 in terms of late winter and spring accumulated
 rainfall. It is therefore consistent that we have a positive correlation between elevation and NDVI
@@ -712,6 +718,9 @@ scale fill brewer(palette=”Accent”)
 # Display plot
 g
 ```
+
+![Image description](Density_plot_NDVI.jpg)
+
 
 ```
 MZ joined$ID <- seq.int(nrow(MZ joined))
