@@ -177,6 +177,7 @@ NDVI 14.05.2018 <- tm shape(Sentinel NDVI 14.05.2018) + tm raster(palette=”YlG
 = TRUE, text.size = 1.2)
 NDVI 16.06.2018 <- tm shape(Sentinel NDVI 16.06.2018) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
 = TRUE, text.size = 1.2)
+
 # Map NDVI 2019
 NDVI 04.04.2019 <- tm shape(Sentinel NDVI 04.04.2019) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
 = TRUE, text.size = 1.2)
