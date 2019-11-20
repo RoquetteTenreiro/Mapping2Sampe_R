@@ -731,6 +731,7 @@ data.pca <- prcomp(dataframe[,c(9:15,17:19)], scale = TRUE)
 summary(data.pca)
 autoplot(data.pca, colour = ’white’, loadings = TRUE, loadings.label = TRUE, loadings.label.size = 5)
 ```
+![Image description](PCA_autoplot_means.jpg)
 
 ```
 # To check PC scores
@@ -790,6 +791,8 @@ library(cluster)
 data <- dataframe[c(9,12,17:19)]
 fviz nbclust(dataframe, FUN = hcut, method = ”wss”)
 ```
+![Image description](cluster_amount.jpg)
+
 The proposed amount of 3-4 zones seems representative enough since adding more classes would
 not low the total within sum of square of this classification.
 
@@ -840,6 +843,9 @@ Elevation threshold = (a+b)/2
 
 Elevation threshold # 175.54 m
 ```
+![Image description](E_NDVI_byYear.jpg)
+![Image description](ECa2_NDVI_mean.jpg)
+
 Once confirmed the correlation between soil physical properties (Elevation, ECa2) and agronomic
 measures (in this case the annual means of NDVI), a classification algorithm is performed in order
 to cluster four management zones.
