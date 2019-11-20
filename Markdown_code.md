@@ -139,7 +139,92 @@ Sentinel NIR 14.05.2019 <- raster(”sentinel/R analysis/Sentinel NIR 14.05.2019
 This section estimates NDVI considering that Satellite B4 corresponds to Red wave length and B8
 to NIR wave length. Data is in raster format with a spatial resolution of 10x10 m.
 
+```
+# NDVI 2018
+Sentinel NDVI 19.04.2018 <- (Sentinel NIR 19.04.2018 - Sentinel Red 19.04.2018) / (Sentinel NIR 19.04.2018 +
+Sentinel Red 19.04.2018)
+Sentinel NDVI 07.05.2018 <- (Sentinel NIR 07.05.2018 - Sentinel Red 07.05.2018) / (Sentinel NIR 07.05.2018 +
+Sentinel Red 07.05.2018)
+Sentinel NDVI 14.05.2018 <- (Sentinel NIR 14.05.2018 - Sentinel Red 14.05.2018) / (Sentinel NIR 14.05.2018 +
+Sentinel Red 14.05.2018)
+Sentinel NDVI 16.06.2018 <- (Sentinel NIR 16.06.2018 - Sentinel Red 16.06.2018) / (Sentinel NIR 16.06.2018 +
+Sentinel Red 16.06.2018)
+# NDVI 2019
+Sentinel NDVI 04.04.2019 <- (Sentinel NIR 04.04.2019 - Sentinel Red 04.04.2019) / (Sentinel NIR 04.04.2019 +
+Sentinel Red 04.04.2019)
+Sentinel NDVI 14.04.2019 <- (Sentinel NIR 14.04.2019 - Sentinel Red 14.04.2019) / (Sentinel NIR 14.04.2019 +
+Sentinel Red 14.04.2019)
+Sentinel NDVI 27.04.2019 <- (Sentinel NIR 27.04.2019 - Sentinel Red 27.04.2019) / (Sentinel NIR 27.04.2019 +
+Sentinel Red 27.04.2019)
+Sentinel NDVI 14.05.2019 <- (Sentinel NIR 14.05.2019 - Sentinel Red 14.05.2019) / (Sentinel NIR 14.05.2019 +
+Sentinel Red 14.05.2019)
+```
 
+### 2.2 Create maps of NDVI
+
+Here we use ’tm shape’ function applied to raster data (tm raster). It is important to confirm we
+have uploaded the library ’tmap’.
+
+```
+# Map NDVI 2018
+NDVI 19.04.2018 <- tm shape(Sentinel NDVI 19.04.2018) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
+= TRUE, text.size = 1.2)
+NDVI 07.05.2018 <- tm shape(Sentinel NDVI 07.05.2018) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
+= TRUE, text.size = 1.2)
+NDVI 14.05.2018 <- tm shape(Sentinel NDVI 14.05.2018) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
+= TRUE, text.size = 1.2)
+NDVI 16.06.2018 <- tm shape(Sentinel NDVI 16.06.2018) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
+= TRUE, text.size = 1.2)
+# Map NDVI 2019
+NDVI 04.04.2019 <- tm shape(Sentinel NDVI 04.04.2019) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
+= TRUE, text.size = 1.2)
+NDVI 14.04.2019 <- tm shape(Sentinel NDVI 14.04.2019) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
+= TRUE, text.size = 1.2)
+NDVI 27.04.2019 <- tm shape(Sentinel NDVI 27.04.2019) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
+= TRUE, text.size = 1.2)
+NDVI 14.05.2019 <- tm shape(Sentinel NDVI 14.05.2019) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
+= TRUE, text.size = 1.2)
+```
+
+### 2.3 Visualize NDVI raster maps
+
+First for 2018:
+
+Note: ”ncol” means the number of columns up to a maximum limit of 4 features.
+
+```
+tmap arrange(NDVI 19.04.2018, NDVI 07.05.2018, NDVI 14.05.2018, NDVI 16.06.2018, nncol=2)
+```
+Second for 2019:
+
+```
+tmap arrange(NDVI 04.04.2019, NDVI 14.04.2019, NDVI 27.04.2019, NDVI 14.05.2019, ncol=2)
+```
+
+### 2.4 Upload the field vector for clip operations
+
+The selected field vector should be the shapefile polygon of the field. In this particular case,
+the shapefile was obtained with QGIS considering a topographic characterization of the selected
+catchment. The catchment was spatially defined according to a map of flow directions (raster)
+obtained with the SAGA - Wang Liu algorithm. The algorithm defines water flow and hillshades
+orientation in a particular area of interest from a DEM. We used a DEM with 5m spatial resolution
+obtained with LiDAR from CNIG ( http://centrodedescargas.cnig.es/CentroDescargas /index.jsp ).
+A catchment was isolated with an area of approximately 9.5 ha.
+
+```
+# Upload field vector
+field vector <- st read(”sentinel/R analysis/Field vector.shp”)
+plot (field vector$geometry)
+```
+
+In this step it is also important to check whether the coordinate system is the same as the satellite
+imagery; in this particular case we will work with the system WGS84 EPSG 4326.
+
+```
+# Check coordinate system
+crs(field vector)
+crs(Sentinel NDVI 27.04.2019) # as an example to check coordinate system of rasters
+```
 
 
 
