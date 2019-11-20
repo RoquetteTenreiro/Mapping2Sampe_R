@@ -27,7 +27,7 @@ R. The reader can use this document both as a dissemination and a decision suppo
 
 The first step consists on updating all necessary libraries for this analysis.
 
-**install.packages(”rmarkdown”)
+> install.packages(”rmarkdown”)
 
 install.packages(”dplyr”)
 
@@ -73,7 +73,7 @@ install.packages(”tinytex”)
 
 The second step consists on calling all libraries to the script.
 
-**library(knitr)
+library(knitr)
 library(sf)
 library(dplyr)
 library(plyr)
