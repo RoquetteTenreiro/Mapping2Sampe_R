@@ -226,6 +226,50 @@ crs(field vector)
 crs(Sentinel NDVI 27.04.2019) # as an example to check coordinate system of rasters
 ```
 
+### 2.5 Cropping and Masking tools
 
+In the following section the script crops and masks the NDVI maps by the field vector shapefile.
+For more info about these functions please check the outcome and have a look at the following link
+https://rpubs.com/ricardo ochoa/416711
 
+```
+# Crop NDVI data 2018
+cropped feature 1 = crop(Sentinel NDVI 19.04.2018, field vector)
+plot (cropped feature 1)
+cropped feature 2 = crop(Sentinel NDVI 07.05.2018, field vector)
+plot (cropped feature 2)
+cropped feature 3 = crop(Sentinel NDVI 14.05.2018, field vector)
+plot (cropped feature 3)
+cropped feature 4 = crop(Sentinel NDVI 16.06.2018, field vector)
+plot (cropped feature 4)
 
+# Mask NDVI data 2018
+masked feature 1 = mask(Sentinel NDVI 19.04.2018, field vector)
+plot(masked feature 1)
+masked feature 2 = mask(Sentinel NDVI 07.05.2018, field vector)
+plot(masked feature 2)
+masked feature 3 = mask(Sentinel NDVI 14.05.2018, field vector)
+plot(masked feature 3)
+masked feature 4 = mask(Sentinel NDVI 16.06.2018, field vector)
+plot(masked feature 4)
+
+# Crop NDVI data 2019
+cropped feature 5 = crop(Sentinel NDVI 04.04.2019, field vector)
+plot (cropped feature 5)
+cropped feature 6 = crop(Sentinel NDVI 14.04.2019, field vector)
+plot (cropped feature 6)
+cropped feature 7 = crop(Sentinel NDVI 27.04.2019, field vector)
+plot (cropped feature 7)
+cropped feature 8 = crop(Sentinel NDVI 14.05.2019, field vector)
+plot (cropped feature 8)
+
+# Mask NDVI data 2019
+masked feature 5 = mask(Sentinel NDVI 04.04.2019, field vector)
+plot(masked feature 5)
+masked feature 6 = mask(Sentinel NDVI 14.04.2019, field vector)
+plot(masked feature 6)
+masked feature 7 = mask(Sentinel NDVI 27.04.2019, field vector)
+plot(masked feature 7)
+masked feature 8 = mask(Sentinel NDVI 14.05.2019, field vector)
+plot(masked feature 8)
+```
