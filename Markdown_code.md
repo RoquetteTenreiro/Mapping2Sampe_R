@@ -220,7 +220,6 @@ A catchment was isolated with an area of approximately 9.5 ha.
 ```
 # Upload field vector
 field vector <- st read(”sentinel/R analysis/Field vector.shp”)
-plot (field vector$geometry)
 ```
 
 In this step it is also important to check whether the coordinate system is the same as the satellite
@@ -279,6 +278,9 @@ plot(masked feature 7)
 masked feature 8 = mask(Sentinel NDVI 14.05.2019, field vector)
 plot(masked feature 8)
 ```
+![Image description](crop.png)
+
+![Image description](mask.png)
 
 ### 2.6 Visualization mode: Interactive (view) vs. Static (plot) viewing
 
