@@ -6,14 +6,14 @@ by Tomás Roquette Tenreiro
 Institute for Sustainable Agriculture (IAS-CSIC)
 Córdoba, 2019
 
-# 1.1 R Markdown
+## 1.1 R Markdown
 
 This is a R Markdown (V3.6) / LaTeX type presentation. Markdown is a simple formatting syntax
 for authoring HTML, PDF, and MS Word documents. The generated document includes both
 content and output of any embedded R code chunks within the document. For more details see
 http://rmarkdown.rstudio.com.
 
-# 1.2 General introduction
+## 1.2 General introduction
 
 The following R-script aims to describe an analytical procedure that combined multiple spatial data
 in order to classify management zones for sampling and soil moisture probe installation. The main
@@ -23,11 +23,11 @@ about 9.5 ha, located in the arable region of Cordoba. This document aims also t
 that can be adjusted to similar analyses or function as a guide to conduct geospatial analysis with
 R. The reader can use this document both as a dissemination and a decision supporting tool.
 
-# 1.3 Necessary material - R libraries
+## 1.3 Necessary material - R libraries
 
 The first step consists on updating all necessary libraries for this analysis.
 
-install.packages(”rmarkdown”)
+**install.packages(”rmarkdown”)
 install.packages(”dplyr”)
 install.packages(”plyr”)
 install.packages(”reshape2”)
@@ -48,11 +48,11 @@ install.packages(”ggpmisc”)
 install.packages(”knitr”)
 install.packages(”installr”)
 install.packages(”lmtest”, repos = ”http://cran.us.r-project.org”)
-install.packages(”tinytex”)
+install.packages(”tinytex”)**
 
 The second step consists on calling all libraries to the script.
 
-library(knitr)
+**library(knitr)
 library(sf)
 library(dplyr)
 library(plyr)
@@ -75,6 +75,6 @@ library(wesanderson)
 library(ggpmisc)
 library(markdown)
 library(tinytex)
-library(lmtest)
+library(lmtest)**
 
 
