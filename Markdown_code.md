@@ -419,4 +419,124 @@ dryland field. Biosystems Engineering, 94(1), 19-32.
 library(knitr) # For knitting document and include graphics function
 library(ggplot2) # For plotting
 library(png) # For grabbing the dimensions of png files
+
+# Define file path
+img1 path <- ”sentinel/R analysis/Pictures Sampling/1.png”
+img2 path <- ”sentinel/R analysis/Pictures Sampling/2.png”
+img3 path <- ”sentinel/R analysis/Pictures Sampling/3.png”
+img4 path <- ”sentinel/R analysis/Pictures Sampling/4.png”
+img5 path <- ”sentinel/R analysis/Pictures Sampling/3.png”
+img6 path <- ”sentinel/R analysis/Pictures Sampling/4.png”
+
+# Display pictures
+include graphics(img1 path)
+include graphics(img2 path)
+include graphics(img3 path)
+include graphics(img4 path)
+include graphics(img5 path)
+include graphics(img6 path)
+```
+
+### 3.2 Upload soil physical and chemical data
+
+Data collected at 10th October 2019; Field location: Guad´alcazar, C´ordoba, Spain.
+
+Five different types of properties:
+
+1) Soil texture (%Clay, %Sand);
+
+2) Soil ECa (35 and 85 cm depth);
+
+3) Slope orientation (degrees);
+
+4) Elevation (m);
+
+5) Soil pH;
+
+```
+# Upload raster data
+GF Elevation <- raster(”GF Elevation.tif”)
+GF Orientation <- raster(”GF Orientation.tif”)
+GF ECa1 <- raster(”GF CEa1.tif”)
+GF ECa2 <- raster(”GF CEa2.tif”)
+
+# Convert to point-based (vectorial) data
+GF Elevation dots <- rasterToPoints(GF Elevation, spatial = TRUE) %>% st as sf()
+names(GF Elevation dots)[names(GF Elevation dots) == ”GF Elevation”] <- ”Elevation”
+GF Orientation dots <- rasterToPoints(GF Orientation, spatial = TRUE) %>% st as sf()
+names(GF Orientation dots)[names(GF Orientation dots) == ”GF Orientation”] <- ”Orientation”
+GF ECa1 dots <- rasterToPoints(GF ECa1, spatial = TRUE) %>% st as sf()
+names(GF ECa1 dots)[names(GF ECa1 dots) == ”GF CEa1”] <- ”ECa1”
+GF ECa2 dots <- rasterToPoints(GF ECa2, spatial = TRUE) %>% st as sf()
+names(GF ECa2 dots)[names(GF ECa2 dots) == ”GF CEa2”] <- ”ECa2”
+```
+
+### 3.3 Join field data and NDVI data on a single shapefile
+
+Here we run a spatial join in order to build a single shapefile containing point based data (10x10m)
+with plant vigor (represented by NDVI), soil physical properties (elevation, orientation, ECa, texture)
+and chemical data (pH).
+
+```
+# Start spatial join (NDVI + Elevation + Orientation + ECa)
+rm(MZ joined)
+
+MZ joined = st join(NDVI vector 19.04.2018, NDVI vector 07.05.2018[”NDVI 07.05.2018”],
+join = st nearest feature)
+
+MZ joined = st join(MZ joined, NDVI vector 14.05.2018[”NDVI 14.05.2018”], join = st nearest feature)
+MZ joined = st join(MZ joined, NDVI vector 16.06.2018[”NDVI 16.06.2018”], join = st nearest feature)
+MZ joined = st join(MZ joined, NDVI vector 04.04.2019[”NDVI 04.04.2019”], join = st nearest feature)
+MZ joined = st join(MZ joined, NDVI vector 14.04.2019[”NDVI 14.04.2019”], join = st nearest feature)
+MZ joined = st join(MZ joined, NDVI vector 27.04.2019[”NDVI 27.04.2019”], join = st nearest feature)
+MZ joined = st join(MZ joined, NDVI vector 14.05.2019[”NDVI 14.05.2019”], join = st nearest feature)
+MZ joined = st join(MZ joined, GF Elevation dots[”Elevation”], join = st nearest feature)
+MZ joined = st join(MZ joined, GF Orientation dots[”Orientation”], join = st nearest feature)
+MZ joined = st join(MZ joined, GF ECa1 dots[”ECa1”], join = st nearest feature)
+MZ joined = st join(MZ joined, GF ECa2 dots[”ECa2”], join = st nearest feature)
+
+# Convert Eca from mS/m to dS/m and estimate ECa mean
+MZ joined$ECa1 <- MZ joined$ECa1/100
+MZ joined$ECa2 <- MZ joined$ECa2/100
+MZ joined$EC mean <- ((MZ joined$ECa1+MZ joined$ECa2)/2)
+
+# A simple classification of soil texture based on ECa proposed by Greenfields: http://www.greenfield.agrodrone.es/
+MZ joined$Texture <- ”Clay loamy”
+MZ joined$Texture[MZ joined$ECa2 > 0.60] <- ”Clay”
+MZ joined$Texture[MZ joined$ECa1 < 0.10] <- ”Clay loamy”
+tm shape(MZ joined) + tm dots(col = ”Texture”, palette = ”RdYlGn”, n=2) + tm style(”cobalt”)
+```
+
+### 3.4 From soil sampling to mapping
+
+A total of 10 soil samples were collected at 30-40cm according to the spatial pattern of ECa. Data is
+spatially interpolated following a ’nearest-feature’ algorithm in order to produce point based vectorial
+maps with the same spatial resolution of MZ joined (10x10m).
+
+```
+# Upload sampling dots
+Sampling vector <- st read(”Sampling dots.shp”)
+Sampling map <- tm shape(Sampling vector) + tm dots(col = ”green”) + tm style(”cobalt”)
+Sampling map
+# Rename: translating from Spanish to English
+names(Sampling vector)[names(Sampling vector) == ”ARCILLA”] <- ”Clay”
+names(Sampling vector)[names(Sampling vector) == ”PH”] <- ”pH”
+names(Sampling vector)[names(Sampling vector) == ”ARENA”] <- ”Sand”
+```
+
+Here we interpolate sampling data by applying a spatial join through ’st nearest feature’.
+
+```
+# Spatial join
+MZ joined = st join(MZ joined, Sampling vector[”Clay”], join = st nearest feature)
+MZ joined = st join(MZ joined, Sampling vector[”pH”], join = st nearest feature)
+MZ joined = st join(MZ joined, Sampling vector[”Sand”], join = st nearest feature)
+
+# Map sampling points
+Clay map <- tm shape(MZ joined) + tm dots(col = ”Clay”, palette = ”YlOrBr”, n=8) + tm style(”cobalt”)
+Sand map <- tm shape(MZ joined) + tm dots(col = ”Sand”, palette = ”Oranges”, n=8) + tm style(”cobalt”)
+pH map <- tm shape(MZ joined) + tm dots(col = ”pH”, palette = ”Purples”, n=8) + tm style(”cobalt”)
+
+# Display facets
+tmap arrange(Clay map, Sand map, pH map, ncol=3)
 ```
