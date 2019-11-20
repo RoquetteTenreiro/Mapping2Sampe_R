@@ -785,7 +785,7 @@ correlate to ECa?”, y=”NDVI”, x=”Deep Eca (dS/m)”, caption=”NDVI mea
 deriv( 7.65-(0.0797*x)+(0.000228*(x2)), ”x”)
 a = (0.0797 / 0.000228) / 2 # 174.78
 # solve 1st derivative for E x NDVI 2019
-deriv( -10.6-(0.128*x)+(0.000363*(x2)), ”x”)
+deriv(~ -10.6-(0.128*x)+(0.000363*(x2)), ”x”)
 b = (0.128 / 0.000363) / 2 # 176.31
 Elevation threshold = (a+b)/2
 Elevation threshold # 175.54 m
