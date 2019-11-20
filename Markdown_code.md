@@ -439,6 +439,20 @@ include graphics(img4 path)
 include graphics(img5 path)
 include graphics(img6 path)
 ```
+Please check:
+
+> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/1.jpg
+
+> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/2.jpg
+
+> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/3.jpg
+
+> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/4.jpg
+
+> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/5.jpg
+
+> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/6.jpg
+
 
 ### 3.2 Upload soil physical and chemical data
 
@@ -921,13 +935,14 @@ map Probes <- tm shape(mergedata) + tm dots(col = ”Probes”, palette = mycols
 # Display facets
 tmap arrange(map MZ, map Probes, ncol=2)
 ```
-https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/FinalMap.jpg
+Check final result at:
+> https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/FinalMap.jpg
 
 ## 5 Additional reading material
 
 - https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/
 
-- https://github.com/RoquetteTenreiro/SDAE R lecture
+- https://github.com/RoquetteTenreiro/SDAE_R_lecture
 
 - https://geocompr.robinlovelace.net/
 
