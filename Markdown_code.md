@@ -529,6 +529,7 @@ MZ joined$Texture[MZ joined$ECa2 > 0.60] <- ”Clay”
 MZ joined$Texture[MZ joined$ECa1 < 0.10] <- ”Clay loamy”
 tm shape(MZ joined) + tm dots(col = ”Texture”, palette = ”RdYlGn”, n=2) + tm style(”cobalt”)
 ```
+![Image description](Texture_map.png)
 
 ### 3.4 From soil sampling to mapping
 
@@ -546,6 +547,8 @@ names(Sampling vector)[names(Sampling vector) == ”ARCILLA”] <- ”Clay”
 names(Sampling vector)[names(Sampling vector) == ”PH”] <- ”pH”
 names(Sampling vector)[names(Sampling vector) == ”ARENA”] <- ”Sand”
 ```
+
+![Image description](Sampling_points.jpg)
 
 ```
 # A few sampling photos
