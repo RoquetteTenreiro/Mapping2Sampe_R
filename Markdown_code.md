@@ -441,6 +441,8 @@ include graphics(img6 path)
 ```
 Please check:
 
+![Image description](1.jpg)
+
 > https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/1.jpg
 
 > https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/2.jpg
@@ -935,10 +937,12 @@ map Probes <- tm shape(mergedata) + tm dots(col = ”Probes”, palette = mycols
 # Display facets
 tmap arrange(map MZ, map Probes, ncol=2)
 ```
-Check final result at:
+
 ![Image description](FinalMap.jpg)
 
+Check final result at:
 > https://github.com/RoquetteTenreiro/Mapping2Sampe_R/blob/master/FinalMap.jpg
+
 
 ## 5 Additional reading material
 
