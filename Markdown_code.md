@@ -947,6 +947,8 @@ g <- g + geom vline(aes(xintercept=0.43), color=”darksalmon”, linetype=”da
 geom vline(aes(xintercept=0.45), color=”darksalmon”, linetype=”dashed”, size=1)
 g
 ```
+![Image description](DensityPlots_ECa_Zone.jpg)
+
 ### 4.5 Mapping 2 sample
 
 The following map indicates the proposed points to install soil moisture probes. Each colored
