@@ -361,4 +361,62 @@ can be created in two ways: 1) by specifying the by argument with one or two var
 of the layer functions (for instance, the argument col in ’tm fill’). For more information please
 check https://www.rdocumentation.org/packages/tmap/versions/2.3-1/topics/tm facets.
 
+### 2.11 Display facets for 2019
 
+1) We convert 2019 raster data into vectorial point-based data while keeping the same spatial
+resolution (10x10m); 
+
+2) Use of ’tmap arrange’ to display facets for NDVI vectorial mapping (2019).
+
+```
+# From raster to point
+NDVI vector 04.04.2019 <- rasterToPoints(masked feature 5, spatial = TRUE) %>% st as sf()
+NDVI vector 14.04.2019 <- rasterToPoints(masked feature 6, spatial = TRUE) %>% st as sf()
+NDVI vector 27.04.2019 <- rasterToPoints(masked feature 7, spatial = TRUE) %>% st as sf()
+NDVI vector 14.05.2019 <- rasterToPoints(masked feature 8, spatial = TRUE) %>% st as sf()
+
+# Correct feature name
+names(NDVI vector 04.04.2019)[names(NDVI vector 04.04.2019) == ”layer”] <- ”NDVI 04.04.2019”
+names(NDVI vector 14.04.2019)[names(NDVI vector 14.04.2019) == ”layer”] <- ”NDVI 14.04.2019”
+names(NDVI vector 27.04.2019)[names(NDVI vector 27.04.2019) == ”layer”] <- ”NDVI 27.04.2019”
+names(NDVI vector 14.05.2019)[names(NDVI vector 14.05.2019) == ”layer”] <- ”NDVI 14.05.2019”
+
+# Create maps for 2019
+NDVI points 5 <- tm shape(NDVI vector 04.04.2019) + tm dots(col=”NDVI 04.04.2019”, palette=”YlGn”, n=10)
++ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
+NDVI points 6 <- tm shape(NDVI vector 14.04.2019) + tm dots(col=”NDVI 14.04.2019”, palette=”YlGn”, n=10)
++ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
+NDVI points 7 <- tm shape(NDVI vector 27.04.2019) + tm dots(col=”NDVI 27.04.2019”, palette=”YlGn”, n=10)
++ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
+NDVI points 8 <- tm shape(NDVI vector 14.05.2019) + tm dots(col=”NDVI 14.05.2019”, palette=”YlGn”, n=10)
++ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
+
+# Display facets
+tmap arrange(NDVI points 5, NDVI points 6, NDVI points 7, NDVI points 8, ncol=4)
+```
+
+## 3 Geo-spatial analysis of field data
+
+### 3.1 Display sampling and ECa measuring photos
+
+Some photos of the measures taken with a Dualem sensor (i.e. electromagnetic induction sensor),
+spatial resolution of 1x15m. Soil ECa was measured at 35 and 85 cm depth before sowing and a
+few days after a rainfall event of aprox. 10 mm. Soil samples were also collected to estimate pH
+and clay content.
+
+For more info in regard to ECa sensing/mapping please read:
+
+- Johnson, C. K., Doran, J. W., Duke, H. R., Wienhold, B. J., Eskridge, K. M., & Shanahan,
+J. F. (2001). Field-scale electrical conductivity mapping for delineating soil condition. Soil Science
+Society of America Journal, 65(6), 1829-1837.
+
+- McCutcheon, M. C., Farahani, H. J., Stednick, J. D., Buchleiter, G. W., & Green, T. R.
+(2006). Effect of soil water on apparent soil electrical conductivity and texture relationships in a
+dryland field. Biosystems Engineering, 94(1), 19-32.
+
+```
+# Upload libraries ’imager’ and ’png’
+library(knitr) # For knitting document and include graphics function
+library(ggplot2) # For plotting
+library(png) # For grabbing the dimensions of png files
+```
