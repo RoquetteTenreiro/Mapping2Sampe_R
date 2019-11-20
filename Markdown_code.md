@@ -6,14 +6,16 @@ by Tomás Roquette Tenreiro
 Institute for Sustainable Agriculture (IAS-CSIC)
 Córdoba, 2019
 
-## 1.1 R Markdown
+## 1 Introduction
+
+### 1.1 R Markdown
 
 This is a R Markdown (V3.6) / LaTeX type presentation. Markdown is a simple formatting syntax
 for authoring HTML, PDF, and MS Word documents. The generated document includes both
 content and output of any embedded R code chunks within the document. For more details see
 http://rmarkdown.rstudio.com.
 
-## 1.2 General introduction
+### 1.2 General introduction
 
 The following R-script aims to describe an analytical procedure that combined multiple spatial data
 in order to classify management zones for sampling and soil moisture probe installation. The main
@@ -23,7 +25,7 @@ about 9.5 ha, located in the arable region of Cordoba. This document aims also t
 that can be adjusted to similar analyses or function as a guide to conduct geospatial analysis with
 R. The reader can use this document both as a dissemination and a decision supporting tool.
 
-## 1.3 Necessary material - R libraries
+### 1.3 Necessary material - R libraries
 
 The first step consists on updating all necessary libraries for this analysis.
 
@@ -79,7 +81,7 @@ library(markdown)
 library(tinytex)
 library(lmtest)
 ```
-## 1.4 Initial details - working directory
+### 1.4 Initial details - working directory
 
 In this section we set initial details to specify the working directory; in this particular case the analysis
 was linked to the internal folder Experimental Catchment Cordoba 19 20 where input and output
@@ -93,7 +95,7 @@ knitr::opts knit$set(root.dir =
 ”C:/Users/Tomas R. Tenreiro/Desktop/Experimental Catchment Cordoba 19 20” )
 ```
 
-## 1.5 Input material
+### 1.5 Input material
 
 This section uploads all input material. In this particular case, we will work with satellite data
 (Sentinel-2), atmospherically corrected (and cloud cover < 4%), that was downloaded from Sentinel-
@@ -130,6 +132,12 @@ Sentinel Red 14.05.2019 <- raster(”sentinel/R analysis/Sentinel Red 14.05.2019
 Sentinel NIR 14.05.2019 <- raster(”sentinel/R analysis/Sentinel NIR 14.05.2019.tiff”)
 ```
 
+## 2 Geo-spatial analysis of satellite NDVI
+
+### 2.1 Estimate NDVI
+
+This section estimates NDVI considering that Satellite B4 corresponds to Red wave length and B8
+to NIR wave length. Data is in raster format with a spatial resolution of 10x10 m.
 
 
 
