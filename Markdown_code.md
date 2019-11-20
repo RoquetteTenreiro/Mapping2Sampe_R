@@ -273,3 +273,92 @@ plot(masked feature 7)
 masked feature 8 = mask(Sentinel NDVI 14.05.2019, field vector)
 plot(masked feature 8)
 ```
+
+### 2.6 Visualization mode: Interactive (view) vs. Static (plot) viewing
+
+Here we switch to an interactive viewing mode of the outcomes (please run this script in R-studio
+to check zooming options). If you want to get back to the ”static” mode please switch ’view’ by
+’plot’ in the function term ’tmap mode()’.
+
+```
+tmap mode(”view”)
+# or tmap mode(”plot”) instead
+```
+
+### 2.7 Interactive mapping of masked NDVI rasters
+
+```
+# For 2018
+masked 1 <- tm shape(masked feature 1) + tm raster(palette=”YlGn”,n=10, title=”NDVI 19.04.2018”) +
+tm legend(outside = TRUE, text.size = 1.2)
+masked 2 <- tm shape(masked feature 2) + tm raster(palette=”YlGn”,n=10, title=”NDVI 07.05.2018”) +
+tm legend(outside = TRUE, text.size = 1.2)
+masked 3 <- tm shape(masked feature 3) + tm raster(palette=”YlGn”,n=10, title=”NDVI 14.05.2018”) +
+tm legend(outside = TRUE, text.size = 1.2)
+masked 4 <- tm shape(masked feature 4) + tm raster(palette=”YlGn”,n=10, title=”NDVI 16.06.2018”) +
+tm legend(outside = TRUE, text.size = 1.2)
+
+# For 2019
+masked 5 <- tm shape(masked feature 5) + tm raster(palette=”YlGn”,n=10, title=”NDVI 04.04.2019”) +
+tm legend(outside = TRUE, text.size = 1.2)
+masked 6 <- tm shape(masked feature 6) + tm raster(palette=”YlGn”,n=10, title=”NDVI 14.04.2019”) +
+tm legend(outside = TRUE, text.size = 1.2)
+masked 7 <- tm shape(masked feature 7) + tm raster(palette=”YlGn”,n=10, title=”NDVI 27.04.2019”) +
+tm legend(outside = TRUE, text.size = 1.2)
+masked 8 <- tm shape(masked feature 8) + tm raster(palette=”YlGn”,n=10, title=”NDVI 14.05.2019”) +
+tm legend(outside = TRUE, text.size = 1.2)
+```
+
+### 2.8 Print NDVI masked map for 2018
+
+It is possible to zoom each facet separately in R-studio and move the corresponding maps.
+
+```
+tmap arrange(masked 1, masked 2, masked 3, masked 4, ncol=2)
+```
+### 2.9 Print NDVI masked map for 2019
+
+```
+tmap arrange(masked 5, masked 6, masked 7, masked 8, ncol=2)
+```
+
+### 2.10 Display facets for 2018
+
+1) We convert 2018 raster data into vectorial point-based data while keeping the same spatial
+resolution (10x10m); 
+
+2) Use of ’tmap arrange’ to display facets for NDVI vectorial mapping (2018).
+
+```
+# From raster to point
+NDVI vector 19.04.2018 <- rasterToPoints(masked feature 1, spatial = TRUE) %>% st as sf()
+NDVI vector 07.05.2018 <- rasterToPoints(masked feature 2, spatial = TRUE) %>% st as sf()
+NDVI vector 14.05.2018 <- rasterToPoints(masked feature 3, spatial = TRUE) %>% st as sf()
+NDVI vector 16.06.2018 <- rasterToPoints(masked feature 4, spatial = TRUE) %>% st as sf()
+
+# Correct feature name
+names(NDVI vector 19.04.2018)[names(NDVI vector 19.04.2018) == ”layer”] <- ”NDVI 19.04.2018”
+names(NDVI vector 07.05.2018)[names(NDVI vector 07.05.2018) == ”layer”] <- ”NDVI 07.05.2018”
+names(NDVI vector 14.05.2018)[names(NDVI vector 14.05.2018) == ”layer”] <- ”NDVI 14.05.2018”
+names(NDVI vector 16.06.2018)[names(NDVI vector 16.06.2018) == ”layer”] <- ”NDVI 16.06.2018”
+
+# Create maps for 2018
+NDVI points 1 <- tm shape(NDVI vector 19.04.2018) + tm dots(col=”NDVI 19.04.2018”, palette=”YlGn”, n=10)
++ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
+NDVI points 2 <- tm shape(NDVI vector 07.05.2018) + tm dots(col=”NDVI 07.05.2018”, palette=”YlGn”, n=10)
++ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
+NDVI points 3 <- tm shape(NDVI vector 14.05.2018) + tm dots(col=”NDVI 14.05.2018”, palette=”YlGn”, n=10)
++ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
+NDVI points 4 <- tm shape(NDVI vector 16.06.2018) + tm dots(col=”NDVI 16.06.2018”, palette=”YlGn”, n=10)
++ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
+
+# Display facets
+tmap arrange(NDVI points 1, NDVI points 2, NDVI points 3, NDVI points 4, ncol=4)
+```
+
+The previous script is a ’tmap-element’ that specifies facets (small multiples). Small multiples
+can be created in two ways: 1) by specifying the by argument with one or two variable names, by which the data is grouped, 2) by specifying multiple variable names in any of the aesthetic argument
+of the layer functions (for instance, the argument col in ’tm fill’). For more information please
+check https://www.rdocumentation.org/packages/tmap/versions/2.3-1/topics/tm facets.
+
+
