@@ -27,7 +27,7 @@ R. The reader can use this document both as a dissemination and a decision suppo
 
 The first step consists on updating all necessary libraries for this analysis.
 
-> install.packages(”rmarkdown”)
+``` install.packages(”rmarkdown”)
 
 install.packages(”dplyr”)
 
@@ -69,11 +69,11 @@ install.packages(”installr”)
 
 install.packages(”lmtest”, repos = ”http://cran.us.r-project.org”)
 
-install.packages(”tinytex”)
+install.packages(”tinytex”) ```
 
 The second step consists on calling all libraries to the script.
 
-library(knitr)
+```library(knitr)
 library(sf)
 library(dplyr)
 library(plyr)
@@ -96,6 +96,6 @@ library(wesanderson)
 library(ggpmisc)
 library(markdown)
 library(tinytex)
-library(lmtest)**
+library(lmtest)```
 
 
