@@ -11,7 +11,7 @@ Córdoba, 2019
 
 ### 1.1 R Markdown
 
-This is a R Markdown (V3.6) / LaTeX type presentation. Markdown is a simple formatting syntax
+This is a R Markdown (V3.6) type presentation. Markdown is a simple formatting syntax
 for authoring HTML, PDF, and MS Word documents. The generated document includes both
 content and output of any embedded R code chunks within the document. For more details see
 http://rmarkdown.rstudio.com.
@@ -624,4 +624,55 @@ geom line(col=”blue”) + scale colour brewer(palette = ”Set1”) + coord ca
 October 2017)”, caption=”Hydrologic Year from October - September”)
 
 graph r 2018
+
+# Cumulative late winter and spring rainfall: 480.5 mm
+rain 2018$P[rain 2018$Month == ”February”] + rain 2018$P[rain 2018$Month == ”March”] +
+rain 2018$P[rain 2018$Month == ”April”]
+
+graph r 2019 <- ggplot(rain 2019, aes(x=Month number, y=P)) + geom point(shape=21, size=2, stroke=1.5,
+fill=”darkslateblue”) +
+geom line(col=”blue”) + scale colour brewer(palette = ”Set1”) + coord cartesian(xlim=c(1, 11.9), ylim=c(0, 300))
++ labs(title=”2019 Rainfall”, subtitle=”Monthly values”, y=”Precipitation (mm)”, x=”Month number (Month 1 =
+October 2018)”, caption=”Hydrologic Year from October - September”)
+
+graph r 2019
+
+rain 2019$P[rain 2019$Month == ”February”] + rain 2019$P[rain 2018$Month == ”March”] +
+rain 2019$P[rain 2019$Month == ”April”]
+
+# Cumulative rainfall (Feb-April 2019): 78 mm
 ```
+
+There is a clear contrast between 2018 and 2019 in terms of late winter and spring accumulated
+rainfall. It is therefore consistent that we have a positive correlation between elevation and NDVI
+for 2018 and negative for 2019. In a wet spring, the crop responded better on higher elevations due
+to runoff and worse in lower zones due to saturation, and the opposite is observed for 2019 under
+water shortage. The combination year x crop is not the best for our objective, we are mapping management zones
+for a winter wheat crop and the historical wheat data is less affected by stress than the rapeseed
+sown in 2019. So let’s have a look at the density plots for means of NDVI, considering the three
+most correlated dates for each year (according to the PCA).
+
+```
+# upload RColor library
+library(RColorBrewer)
+
+MZ joined$ndvi 2018 <- ((MZ joined$NDVI 07.05.2018 + MZ joined$NDVI 14.05.2018 +
+MZ joined$NDVI 19.04.2018) / 3)
+MZ joined$ndvi 2019 <- ((MZ joined$NDVI 04.04.2019 + MZ joined$NDVI 04.04.2019 +
+MZ joined$NDVI 27.04.2019) / 3)
+MZ joined$ndvi <- ((MZ joined$ndvi 2018 + MZ joined$ndvi 2019) / 2)
+
+# With transparency and multiple x values
+g <- ggplot(MZ joined, aes(x = ndvi 2018, fill=”ndvi 2018”)) + geom density(position=”identity”, alpha=0.6)
++ scale x continuous(name = ”Density plot of NDVI”, breaks = seq(0, 1, 0.2), limits=c(0.3, 1)) +
+scale y continuous(name = ”Density”) + ggtitle(”Density plot of mean NDVI”) + theme bw() + theme(plot.title
+= element text(size = 14, family = ”Tahoma”, face = ”bold”), text = element text(size = 12, family = ”Tahoma”))
+g <- g + geom density(data=MZ joined, aes(x=ndvi 2019, fill=”ndvi 2019”), adjust=1.5, alpha=.4)
+g <- g + geom density(data=MZ joined, aes(x=ndvi, fill=”ndvi”), adjust=1.5, alpha=.4)
+g <- g + scale fill discrete(name=’Mean’,labels=c(”2018”, ”2019”, ”2018 + 2019”)) +
+scale fill brewer(palette=”Accent”)
+
+# Display plot
+g
+```
+
