@@ -150,6 +150,7 @@ Sentinel NDVI 14.05.2018 <- (Sentinel NIR 14.05.2018 - Sentinel Red 14.05.2018) 
 Sentinel Red 14.05.2018)
 Sentinel NDVI 16.06.2018 <- (Sentinel NIR 16.06.2018 - Sentinel Red 16.06.2018) / (Sentinel NIR 16.06.2018 +
 Sentinel Red 16.06.2018)
+
 # NDVI 2019
 Sentinel NDVI 04.04.2019 <- (Sentinel NIR 04.04.2019 - Sentinel Red 04.04.2019) / (Sentinel NIR 04.04.2019 +
 Sentinel Red 04.04.2019)
@@ -675,4 +676,32 @@ scale fill brewer(palette=”Accent”)
 # Display plot
 g
 ```
+
+```
+MZ joined$ID <- seq.int(nrow(MZ joined))
+dataframe = fortify(MZ joined)
+dataframe$geometry <- NULL
+dataframe <- dataframe[c(1:12,15:17,20,22,24,25)]
+data.pca <- prcomp(dataframe[,c(9:15,17:19)], scale = TRUE)
+summary(data.pca)
+autoplot(data.pca, colour = ’white’, loadings = TRUE, loadings.label = TRUE, loadings.label.size = 5)
+```
+
+```
+# To check PC scores
+data.pca$rotation
+```
+
+Results printed:
+Variable; PC1; PC2
+Elevation; 0.2244102; 0.37895394
+ECa2; -0.3164452; 0.31040253
+[ndvi]; 0.3575164; -0.37110163
+[ndvi 2018]; 0.3678101; 0.13146102
+[ndvi 2019]; 0.1136207; -0.67246147
+Orientation; -0.2613542; 0.03316584
+ECa1; -0.3745638; 0.04875610
+Clay; -0.3811520; -0.07620690
+pH; -0.3613388; -0.34362539
+Sand; 0.2984024; 0.15961924
 
