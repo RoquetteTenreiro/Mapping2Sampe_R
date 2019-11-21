@@ -107,30 +107,36 @@ rapeseed crop.
 
 ```{r}
 # Date 1
-Sentinel Red 19.04.2018 <- raster(”sentinel/R analysis/Sentinel Red 19.04.2018.tiff”)
-Sentinel NIR 19.04.2018 <- raster(”sentinel/R analysis/Sentinel NIR 19.04.2018.tiff”)
+Sentinel_Red_19.04.2018 <- raster("sentinel/R_analysis/Sentinel_Red_19.04.2018.tiff")
+Sentinel_NIR_19.04.2018 <- raster("sentinel/R_analysis/Sentinel_NIR_19.04.2018.tiff")
+
 # Date 2
-Sentinel Red 07.05.2018 <- raster(”sentinel/R analysis/Sentinel Red 07.05.2018.tiff”)
-Sentinel NIR 07.05.2018 <- raster(”sentinel/R analysis/Sentinel NIR 07.05.2018.tiff”)
+Sentinel_Red_07.05.2018 <- raster("sentinel/R_analysis/Sentinel_Red_07.05.2018.tiff")
+Sentinel_NIR_07.05.2018 <- raster("sentinel/R_analysis/Sentinel_NIR_07.05.2018.tiff")
+
 # Date 3
-Sentinel Red 14.05.2018 <- raster(”sentinel/R analysis/Sentinel Red 14.05.2018.tiff”)
-Sentinel NIR 14.05.2018 <- raster(”sentinel/R analysis/Sentinel NIR 14.05.2018.tiff”)
+Sentinel_Red_14.05.2018 <- raster("sentinel/R_analysis/Sentinel_Red_14.05.2018.tiff")
+Sentinel_NIR_14.05.2018 <- raster("sentinel/R_analysis/Sentinel_NIR_14.05.2018.tiff")
+
 # Date 4
-Sentinel Red 16.06.2018 <- raster(”sentinel/R analysis/Sentinel Red 16.06.2018.tiff”)
-Sentinel NIR 16.06.2018 <- raster(”sentinel/R analysis/Sentinel NIR 16.06.2018.tiff”)
+Sentinel_Red_16.06.2018 <- raster("sentinel/R_analysis/Sentinel_Red_16.06.2018.tiff")
+Sentinel_NIR_16.06.2018 <- raster("sentinel/R_analysis/Sentinel_NIR_16.06.2018.tiff")
+
 # Date 5
-Sentinel Red 04.04.2019 <- raster(”sentinel/R analysis/Sentinel Red 04.04.2019.tiff”)
-Sentinel NIR 04.04.2019 <- raster(”sentinel/R analysis/Sentinel NIR 04.04.2019.tiff”)
+Sentinel_Red_04.04.2019 <- raster("sentinel/R_analysis/Sentinel_Red_04.04.2019.tiff")
+Sentinel_NIR_04.04.2019 <- raster("sentinel/R_analysis/Sentinel_NIR_04.04.2019.tiff")
+
 # Date 6
-Sentinel Red 14.04.2019 <- raster(”sentinel/R analysis/Sentinel Red 14.04.2019.tiff”)
-Sentinel NIR 14.04.2019 <- raster(”sentinel/R analysis/Sentinel NIR 14.04.2019.tiff”)
+Sentinel_Red_14.04.2019 <- raster("sentinel/R_analysis/Sentinel_Red_14.04.2019.tiff")
+Sentinel_NIR_14.04.2019 <- raster("sentinel/R_analysis/Sentinel_NIR_14.04.2019.tiff")
+
 # Date 7
-Sentinel Red 27.04.2019 <- raster(”sentinel/R analysis/Sentinel Red 27.04.2019.tiff”)
-Sentinel NIR 27.04.2019 <- raster(”sentinel/R analysis/Sentinel NIR 27.04.2019.tiff”)
+Sentinel_Red_27.04.2019 <- raster("sentinel/R_analysis/Sentinel_Red_27.04.2019.tiff")
+Sentinel_NIR_27.04.2019 <- raster("sentinel/R_analysis/Sentinel_NIR_27.04.2019.tiff")
+
 # Date 8
-Sentinel Red 14.05.2019 <- raster(”sentinel/R analysis/Sentinel Red 14.05.2019.tiff”)
-Sentinel NIR 14.05.2019 <- raster(”sentinel/R analysis/Sentinel NIR 14.05.2019.tiff”)
-```
+Sentinel_Red_14.05.2019 <- raster("sentinel/R_analysis/Sentinel_Red_14.05.2019.tiff")
+Sentinel_NIR_14.05.2019 <- raster("sentinel/R_analysis/Sentinel_NIR_14.05.2019.tiff")
 
 ## 2 Geo-spatial analysis of satellite NDVI
 
@@ -141,24 +147,16 @@ to NIR wave length. Data is in raster format with a spatial resolution of 10x10 
 
 ```{r}
 # NDVI 2018
-Sentinel NDVI 19.04.2018 <- (Sentinel NIR 19.04.2018 - Sentinel Red 19.04.2018) / (Sentinel NIR 19.04.2018 +
-Sentinel Red 19.04.2018)
-Sentinel NDVI 07.05.2018 <- (Sentinel NIR 07.05.2018 - Sentinel Red 07.05.2018) / (Sentinel NIR 07.05.2018 +
-Sentinel Red 07.05.2018)
-Sentinel NDVI 14.05.2018 <- (Sentinel NIR 14.05.2018 - Sentinel Red 14.05.2018) / (Sentinel NIR 14.05.2018 +
-Sentinel Red 14.05.2018)
-Sentinel NDVI 16.06.2018 <- (Sentinel NIR 16.06.2018 - Sentinel Red 16.06.2018) / (Sentinel NIR 16.06.2018 +
-Sentinel Red 16.06.2018)
+Sentinel_NDVI_19.04.2018 <- (Sentinel_NIR_19.04.2018 - Sentinel_Red_19.04.2018) / (Sentinel_NIR_19.04.2018 + Sentinel_Red_19.04.2018)
+Sentinel_NDVI_07.05.2018 <- (Sentinel_NIR_07.05.2018 - Sentinel_Red_07.05.2018) / (Sentinel_NIR_07.05.2018 + Sentinel_Red_07.05.2018)
+Sentinel_NDVI_14.05.2018 <- (Sentinel_NIR_14.05.2018 - Sentinel_Red_14.05.2018) / (Sentinel_NIR_14.05.2018 + Sentinel_Red_14.05.2018)
+Sentinel_NDVI_16.06.2018 <- (Sentinel_NIR_16.06.2018 - Sentinel_Red_16.06.2018) / (Sentinel_NIR_16.06.2018 + Sentinel_Red_16.06.2018)
 
-# NDVI 2019
-Sentinel NDVI 04.04.2019 <- (Sentinel NIR 04.04.2019 - Sentinel Red 04.04.2019) / (Sentinel NIR 04.04.2019 +
-Sentinel Red 04.04.2019)
-Sentinel NDVI 14.04.2019 <- (Sentinel NIR 14.04.2019 - Sentinel Red 14.04.2019) / (Sentinel NIR 14.04.2019 +
-Sentinel Red 14.04.2019)
-Sentinel NDVI 27.04.2019 <- (Sentinel NIR 27.04.2019 - Sentinel Red 27.04.2019) / (Sentinel NIR 27.04.2019 +
-Sentinel Red 27.04.2019)
-Sentinel NDVI 14.05.2019 <- (Sentinel NIR 14.05.2019 - Sentinel Red 14.05.2019) / (Sentinel NIR 14.05.2019 +
-Sentinel Red 14.05.2019)
+#NDVI 2019
+Sentinel_NDVI_04.04.2019 <- (Sentinel_NIR_04.04.2019 - Sentinel_Red_04.04.2019) / (Sentinel_NIR_04.04.2019 + Sentinel_Red_04.04.2019)
+Sentinel_NDVI_14.04.2019 <- (Sentinel_NIR_14.04.2019 - Sentinel_Red_14.04.2019) / (Sentinel_NIR_14.04.2019 + Sentinel_Red_14.04.2019)
+Sentinel_NDVI_27.04.2019 <- (Sentinel_NIR_27.04.2019 - Sentinel_Red_27.04.2019) / (Sentinel_NIR_27.04.2019 + Sentinel_Red_27.04.2019)
+Sentinel_NDVI_14.05.2019 <- (Sentinel_NIR_14.05.2019 - Sentinel_Red_14.05.2019) / (Sentinel_NIR_14.05.2019 + Sentinel_Red_14.05.2019)
 ```
 
 ### 2.2 Create maps of NDVI
@@ -168,24 +166,16 @@ have uploaded the library ’tmap’.
 
 ```{r}
 # Map NDVI 2018
-NDVI 19.04.2018 <- tm shape(Sentinel NDVI 19.04.2018) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
-= TRUE, text.size = 1.2)
-NDVI 07.05.2018 <- tm shape(Sentinel NDVI 07.05.2018) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
-= TRUE, text.size = 1.2)
-NDVI 14.05.2018 <- tm shape(Sentinel NDVI 14.05.2018) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
-= TRUE, text.size = 1.2)
-NDVI 16.06.2018 <- tm shape(Sentinel NDVI 16.06.2018) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
-= TRUE, text.size = 1.2)
+NDVI_19.04.2018 <- tm_shape(Sentinel_NDVI_19.04.2018) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_07.05.2018 <- tm_shape(Sentinel_NDVI_07.05.2018) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_14.05.2018 <- tm_shape(Sentinel_NDVI_14.05.2018) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_16.06.2018 <- tm_shape(Sentinel_NDVI_16.06.2018) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
 
 # Map NDVI 2019
-NDVI 04.04.2019 <- tm shape(Sentinel NDVI 04.04.2019) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
-= TRUE, text.size = 1.2)
-NDVI 14.04.2019 <- tm shape(Sentinel NDVI 14.04.2019) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
-= TRUE, text.size = 1.2)
-NDVI 27.04.2019 <- tm shape(Sentinel NDVI 27.04.2019) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
-= TRUE, text.size = 1.2)
-NDVI 14.05.2019 <- tm shape(Sentinel NDVI 14.05.2019) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
-= TRUE, text.size = 1.2)
+NDVI_04.04.2019 <- tm_shape(Sentinel_NDVI_04.04.2019) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_14.04.2019 <- tm_shape(Sentinel_NDVI_14.04.2019) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_27.04.2019 <- tm_shape(Sentinel_NDVI_27.04.2019) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_14.05.2019 <- tm_shape(Sentinel_NDVI_14.05.2019) + tm_raster(palette="YlGn",n=5) + tm_legend(outside = TRUE, text.size = 1.2)
 ```
 
 ### 2.3 Visualize NDVI raster maps
@@ -195,14 +185,14 @@ First for 2018:
 Note: ”ncol” means the number of columns up to a maximum limit of 4 features.
 
 ```{r}
-tmap arrange(NDVI 19.04.2018, NDVI 07.05.2018, NDVI 14.05.2018, NDVI 16.06.2018, nncol=2)
+tmap arrange(NDVI_19.04.2018, NDVI_07.05.2018, NDVI_14.05.2018, NDVI_16.06.2018, nncol=2)
 ```
 ![Image description](satNDVI_1.jpg)
 
 Second for 2019:
 
 ```{r}
-tmap arrange(NDVI 04.04.2019, NDVI 14.04.2019, NDVI 27.04.2019, NDVI 14.05.2019, ncol=2)
+tmap arrange(NDVI_04.04.2019, NDVI_14.04.2019, NDVI_27.04.2019, NDVI_14.05.2019, ncol=2)
 ```
 ![Image description](satNDVI_2.jpg)
 
@@ -218,7 +208,7 @@ A catchment was isolated with an area of approximately 9.5 ha.
 
 ```{r}
 # Upload field vector
-field vector <- st read(”sentinel/R analysis/Field vector.shp”)
+field_vector <- st read(”sentinel/R_analysis/Field_vector.shp”)
 ```
 
 In this step it is also important to check whether the coordinate system is the same as the satellite
@@ -226,8 +216,8 @@ imagery; in this particular case we will work with the system WGS84 EPSG 4326.
 
 ```{r}
 # Check coordinate system
-crs(field vector)
-crs(Sentinel NDVI 27.04.2019) # as an example to check coordinate system of rasters
+crs(field_vector)
+crs(Sentinel_NDVI_27.04.2019) # as an example to check coordinate system of rasters
 ```
 
 ### 2.5 Cropping and Masking tools
@@ -238,44 +228,44 @@ https://rpubs.com/ricardo ochoa/416711
 
 ```{r}
 # Crop NDVI data 2018
-cropped feature 1 = crop(Sentinel NDVI 19.04.2018, field vector)
-plot (cropped feature 1)
-cropped feature 2 = crop(Sentinel NDVI 07.05.2018, field vector)
-plot (cropped feature 2)
-cropped feature 3 = crop(Sentinel NDVI 14.05.2018, field vector)
-plot (cropped feature 3)
-cropped feature 4 = crop(Sentinel NDVI 16.06.2018, field vector)
-plot (cropped feature 4)
+cropped_feature_1 = crop(Sentinel_NDVI_19.04.2018, field_vector)
+plot (cropped_feature_1)
+cropped_feature_2 = crop(Sentinel_NDVI_07.05.2018, field_vector)
+plot (cropped_feature_2)
+cropped_feature_3 = crop(Sentinel_NDVI_14.05.2018, field_vector)
+plot (cropped_feature_3)
+cropped_feature_4 = crop(Sentinel_NDVI_16.06.2018, field_vector)
+plot (cropped_feature_4)
 
 # Mask NDVI data 2018
-masked feature 1 = mask(Sentinel NDVI 19.04.2018, field vector)
-plot(masked feature 1)
-masked feature 2 = mask(Sentinel NDVI 07.05.2018, field vector)
-plot(masked feature 2)
-masked feature 3 = mask(Sentinel NDVI 14.05.2018, field vector)
-plot(masked feature 3)
-masked feature 4 = mask(Sentinel NDVI 16.06.2018, field vector)
-plot(masked feature 4)
+masked_feature_1 = mask(Sentinel_NDVI_19.04.2018, field_vector)
+plot(masked_feature_1)
+masked_feature_2 = mask(Sentinel_NDVI_07.05.2018, field_vector)
+plot(masked_feature_2)
+masked_feature_3 = mask(Sentinel_NDVI_14.05.2018, field_vector)
+plot(masked_feature_3)
+masked_feature_4 = mask(Sentinel_NDVI_16.06.2018, field_vector)
+plot(masked_feature_4)
 
 # Crop NDVI data 2019
-cropped feature 5 = crop(Sentinel NDVI 04.04.2019, field vector)
-plot (cropped feature 5)
-cropped feature 6 = crop(Sentinel NDVI 14.04.2019, field vector)
-plot (cropped feature 6)
-cropped feature 7 = crop(Sentinel NDVI 27.04.2019, field vector)
-plot (cropped feature 7)
-cropped feature 8 = crop(Sentinel NDVI 14.05.2019, field vector)
-plot (cropped feature 8)
+cropped_feature_5 = crop(Sentinel_NDVI_04.04.2019, field_vector)
+plot (cropped_feature_5)
+cropped_feature_6 = crop(Sentinel_NDVI_14.04.2019, field_vector)
+plot (cropped_feature_6)
+cropped_feature_7 = crop(Sentinel_NDVI_27.04.2019, field_vector)
+plot (cropped_feature_7)
+cropped_feature_8 = crop(Sentinel_NDVI_14.05.2019, field_vector)
+plot (cropped_feature_8)
 
 # Mask NDVI data 2019
-masked feature 5 = mask(Sentinel NDVI 04.04.2019, field vector)
-plot(masked feature 5)
-masked feature 6 = mask(Sentinel NDVI 14.04.2019, field vector)
-plot(masked feature 6)
-masked feature 7 = mask(Sentinel NDVI 27.04.2019, field vector)
-plot(masked feature 7)
-masked feature 8 = mask(Sentinel NDVI 14.05.2019, field vector)
-plot(masked feature 8)
+masked_feature_5 = mask(Sentinel_NDVI_04.04.2019, field_vector)
+plot(masked_feature_5)
+masked_feature_6 = mask(Sentinel_NDVI_14.04.2019, field_vector)
+plot(masked_feature_6)
+masked_feature_7 = mask(Sentinel_NDVI_27.04.2019, field_vector)
+plot(masked_feature_7)
+masked_feature_8 = mask(Sentinel_NDVI_14.05.2019, field_vector)
+plot(masked_feature_8)
 ```
 ![Image description](crop.png)
 
@@ -288,32 +278,24 @@ to check zooming options). If you want to get back to the ”static” mode plea
 ’plot’ in the function term ’tmap mode()’.
 
 ```{r}
-tmap mode(”view”)
-# or tmap mode(”plot”) instead
+tmap_mode(”view”)
+# or tmap_mode(”plot”) instead
 ```
 
 ### 2.7 Interactive mapping of masked NDVI rasters
 
 ```{r}
 # For 2018
-masked 1 <- tm shape(masked feature 1) + tm raster(palette=”YlGn”,n=10, title=”NDVI 19.04.2018”) +
-tm legend(outside = TRUE, text.size = 1.2)
-masked 2 <- tm shape(masked feature 2) + tm raster(palette=”YlGn”,n=10, title=”NDVI 07.05.2018”) +
-tm legend(outside = TRUE, text.size = 1.2)
-masked 3 <- tm shape(masked feature 3) + tm raster(palette=”YlGn”,n=10, title=”NDVI 14.05.2018”) +
-tm legend(outside = TRUE, text.size = 1.2)
-masked 4 <- tm shape(masked feature 4) + tm raster(palette=”YlGn”,n=10, title=”NDVI 16.06.2018”) +
-tm legend(outside = TRUE, text.size = 1.2)
+masked_1 <- tm_shape(masked_feature_1) + tm_raster(palette="YlGn",n=10, title="NDVI_19.04.2018") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_2 <- tm_shape(masked_feature_2) + tm_raster(palette="YlGn",n=10, title="NDVI_07.05.2018") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_3 <- tm_shape(masked_feature_3) + tm_raster(palette="YlGn",n=10, title="NDVI_14.05.2018") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_4 <- tm_shape(masked_feature_4) + tm_raster(palette="YlGn",n=10, title="NDVI_16.06.2018") + tm_legend(outside = TRUE, text.size = 1.2)
 
 # For 2019
-masked 5 <- tm shape(masked feature 5) + tm raster(palette=”YlGn”,n=10, title=”NDVI 04.04.2019”) +
-tm legend(outside = TRUE, text.size = 1.2)
-masked 6 <- tm shape(masked feature 6) + tm raster(palette=”YlGn”,n=10, title=”NDVI 14.04.2019”) +
-tm legend(outside = TRUE, text.size = 1.2)
-masked 7 <- tm shape(masked feature 7) + tm raster(palette=”YlGn”,n=10, title=”NDVI 27.04.2019”) +
-tm legend(outside = TRUE, text.size = 1.2)
-masked 8 <- tm shape(masked feature 8) + tm raster(palette=”YlGn”,n=10, title=”NDVI 14.05.2019”) +
-tm legend(outside = TRUE, text.size = 1.2)
+masked_5 <- tm_shape(masked_feature_5) + tm_raster(palette="YlGn",n=10, title="NDVI_04.04.2019") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_6 <- tm_shape(masked_feature_6) + tm_raster(palette="YlGn",n=10, title="NDVI_14.04.2019") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_7 <- tm_shape(masked_feature_7) + tm_raster(palette="YlGn",n=10, title="NDVI_27.04.2019") + tm_legend(outside = TRUE, text.size = 1.2)
+masked_8 <- tm_shape(masked_feature_8) + tm_raster(palette="YlGn",n=10, title="NDVI_14.05.2019") + tm_legend(outside = TRUE, text.size = 1.2)
 ```
 
 ### 2.8 Print NDVI masked map for 2018
@@ -321,7 +303,7 @@ tm legend(outside = TRUE, text.size = 1.2)
 It is possible to zoom each facet separately in R-studio and move the corresponding maps.
 
 ```{r}
-tmap arrange(masked 1, masked 2, masked 3, masked 4, ncol=2)
+tmap_arrange(masked_1, masked_2, masked_3, masked_4, ncol=2)
 ```
 
 ![Image description](Dynamic_2018.png)
@@ -329,7 +311,7 @@ tmap arrange(masked 1, masked 2, masked 3, masked 4, ncol=2)
 ### 2.9 Print NDVI masked map for 2019
 
 ```{r}
-tmap arrange(masked 5, masked 6, masked 7, masked 8, ncol=2)
+tmap arrange(masked_5, masked_6, masked_7, masked_8, ncol=2)
 ```
 
 ![Image description](Dynamic_2019.png)
@@ -344,29 +326,33 @@ resolution (10x10m);
 
 ```{r}
 # From raster to point
-NDVI vector 19.04.2018 <- rasterToPoints(masked feature 1, spatial = TRUE) %>% st as sf()
-NDVI vector 07.05.2018 <- rasterToPoints(masked feature 2, spatial = TRUE) %>% st as sf()
-NDVI vector 14.05.2018 <- rasterToPoints(masked feature 3, spatial = TRUE) %>% st as sf()
-NDVI vector 16.06.2018 <- rasterToPoints(masked feature 4, spatial = TRUE) %>% st as sf()
+NDVI_vector_19.04.2018 <- rasterToPoints(masked_feature_1, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_07.05.2018 <- rasterToPoints(masked_feature_2, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_14.05.2018 <- rasterToPoints(masked_feature_3, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_16.06.2018 <- rasterToPoints(masked_feature_4, spatial = TRUE) %>% st_as_sf()
 
 # Correct feature name
-names(NDVI vector 19.04.2018)[names(NDVI vector 19.04.2018) == ”layer”] <- ”NDVI 19.04.2018”
-names(NDVI vector 07.05.2018)[names(NDVI vector 07.05.2018) == ”layer”] <- ”NDVI 07.05.2018”
-names(NDVI vector 14.05.2018)[names(NDVI vector 14.05.2018) == ”layer”] <- ”NDVI 14.05.2018”
-names(NDVI vector 16.06.2018)[names(NDVI vector 16.06.2018) == ”layer”] <- ”NDVI 16.06.2018”
+names(NDVI_vector_19.04.2018)[names(NDVI_vector_19.04.2018) == "layer"] <- "NDVI_19.04.2018"
+names(NDVI_vector_07.05.2018)[names(NDVI_vector_07.05.2018) == "layer"] <- "NDVI_07.05.2018"
+names(NDVI_vector_14.05.2018)[names(NDVI_vector_14.05.2018) == "layer"] <- "NDVI_14.05.2018"
+names(NDVI_vector_16.06.2018)[names(NDVI_vector_16.06.2018) == "layer"] <- "NDVI_16.06.2018"
 
 # Create maps for 2018
-NDVI points 1 <- tm shape(NDVI vector 19.04.2018) + tm dots(col=”NDVI 19.04.2018”, palette=”YlGn”, n=10)
-+ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
-NDVI points 2 <- tm shape(NDVI vector 07.05.2018) + tm dots(col=”NDVI 07.05.2018”, palette=”YlGn”, n=10)
-+ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
-NDVI points 3 <- tm shape(NDVI vector 14.05.2018) + tm dots(col=”NDVI 14.05.2018”, palette=”YlGn”, n=10)
-+ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
-NDVI points 4 <- tm shape(NDVI vector 16.06.2018) + tm dots(col=”NDVI 16.06.2018”, palette=”YlGn”, n=10)
-+ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
+NDVI_points_1 <- tm_shape(NDVI_vector_19.04.2018) + tm_dots(col="NDVI_19.04.2018", palette="YlGn", n=10) + tm_style("cobalt") + 
+tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_2 <- tm_shape(NDVI_vector_07.05.2018) + tm_dots(col="NDVI_07.05.2018", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_3 <- tm_shape(NDVI_vector_14.05.2018) + tm_dots(col="NDVI_14.05.2018", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_4 <- tm_shape(NDVI_vector_16.06.2018) + tm_dots(col="NDVI_16.06.2018", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
 
 # Display facets
-tmap arrange(NDVI points 1, NDVI points 2, NDVI points 3, NDVI points 4, ncol=4)
+tmap_arrange(NDVI_points_1,
+             NDVI_points_2,
+             NDVI_points_3,
+             NDVI_points_4,
+             ncol=4)
 ```
 ![Image description](facets_2018.png)
 
@@ -384,29 +370,33 @@ resolution (10x10m);
 
 ```{r}
 # From raster to point
-NDVI vector 04.04.2019 <- rasterToPoints(masked feature 5, spatial = TRUE) %>% st as sf()
-NDVI vector 14.04.2019 <- rasterToPoints(masked feature 6, spatial = TRUE) %>% st as sf()
-NDVI vector 27.04.2019 <- rasterToPoints(masked feature 7, spatial = TRUE) %>% st as sf()
-NDVI vector 14.05.2019 <- rasterToPoints(masked feature 8, spatial = TRUE) %>% st as sf()
+NDVI_vector_04.04.2019 <- rasterToPoints(masked_feature_5, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_14.04.2019 <- rasterToPoints(masked_feature_6, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_27.04.2019 <- rasterToPoints(masked_feature_7, spatial = TRUE) %>% st_as_sf()
+NDVI_vector_14.05.2019 <- rasterToPoints(masked_feature_8, spatial = TRUE) %>% st_as_sf()
 
 # Correct feature name
-names(NDVI vector 04.04.2019)[names(NDVI vector 04.04.2019) == ”layer”] <- ”NDVI 04.04.2019”
-names(NDVI vector 14.04.2019)[names(NDVI vector 14.04.2019) == ”layer”] <- ”NDVI 14.04.2019”
-names(NDVI vector 27.04.2019)[names(NDVI vector 27.04.2019) == ”layer”] <- ”NDVI 27.04.2019”
-names(NDVI vector 14.05.2019)[names(NDVI vector 14.05.2019) == ”layer”] <- ”NDVI 14.05.2019”
+names(NDVI_vector_04.04.2019)[names(NDVI_vector_04.04.2019) == "layer"] <- "NDVI_04.04.2019"
+names(NDVI_vector_14.04.2019)[names(NDVI_vector_14.04.2019) == "layer"] <- "NDVI_14.04.2019"
+names(NDVI_vector_27.04.2019)[names(NDVI_vector_27.04.2019) == "layer"] <- "NDVI_27.04.2019"
+names(NDVI_vector_14.05.2019)[names(NDVI_vector_14.05.2019) == "layer"] <- "NDVI_14.05.2019"
 
 # Create maps for 2019
-NDVI points 5 <- tm shape(NDVI vector 04.04.2019) + tm dots(col=”NDVI 04.04.2019”, palette=”YlGn”, n=10)
-+ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
-NDVI points 6 <- tm shape(NDVI vector 14.04.2019) + tm dots(col=”NDVI 14.04.2019”, palette=”YlGn”, n=10)
-+ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
-NDVI points 7 <- tm shape(NDVI vector 27.04.2019) + tm dots(col=”NDVI 27.04.2019”, palette=”YlGn”, n=10)
-+ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
-NDVI points 8 <- tm shape(NDVI vector 14.05.2019) + tm dots(col=”NDVI 14.05.2019”, palette=”YlGn”, n=10)
-+ tm style(”cobalt”) + tm legend(outside = TRUE, text.size = 1.2)
+NDVI_points_5 <- tm_shape(NDVI_vector_04.04.2019) + tm_dots(col="NDVI_04.04.2019", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_6 <- tm_shape(NDVI_vector_14.04.2019) + tm_dots(col="NDVI_14.04.2019", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_7 <- tm_shape(NDVI_vector_27.04.2019) + tm_dots(col="NDVI_27.04.2019", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
+NDVI_points_8 <- tm_shape(NDVI_vector_14.05.2019) + tm_dots(col="NDVI_14.05.2019", palette="YlGn", n=10) + tm_style("cobalt") + 
+  tm_legend(outside = TRUE, text.size = 1.2)
 
 # Display facets
-tmap arrange(NDVI points 5, NDVI points 6, NDVI points 7, NDVI points 8, ncol=4)
+tmap_arrange(NDVI_points_5,
+             NDVI_points_6,
+             NDVI_points_7,
+             NDVI_points_8,
+             ncol=4)
 ```
 ![Image description](facets_2019.png)
 
@@ -430,26 +420,26 @@ Society of America Journal, 65(6), 1829-1837.
 dryland field. Biosystems Engineering, 94(1), 19-32.
 
 ```{r}
-# Upload libraries ’imager’ and ’png’
-library(knitr) # For knitting document and include graphics function
-library(ggplot2) # For plotting
-library(png) # For grabbing the dimensions of png files
+# Upload libraries 'imager' and 'png'
+library(knitr)    # For knitting document and include_graphics function
+library(ggplot2)  # For plotting
+library(png)      # For grabbing the dimensions of png files
 
-# Define file path
-img1 path <- ”sentinel/R analysis/Pictures Sampling/1.png”
-img2 path <- ”sentinel/R analysis/Pictures Sampling/2.png”
-img3 path <- ”sentinel/R analysis/Pictures Sampling/3.png”
-img4 path <- ”sentinel/R analysis/Pictures Sampling/4.png”
-img5 path <- ”sentinel/R analysis/Pictures Sampling/3.png”
-img6 path <- ”sentinel/R analysis/Pictures Sampling/4.png”
+#Define file ath
+img1_path <- "sentinel/R_analysis/Pictures_Sampling/1.png"
+img2_path <- "sentinel/R_analysis/Pictures_Sampling/2.png"
+img3_path <- "sentinel/R_analysis/Pictures_Sampling/3.png"
+img4_path <- "sentinel/R_analysis/Pictures_Sampling/4.png"
+img5_path <- "sentinel/R_analysis/Pictures_Sampling/3.png"
+img6_path <- "sentinel/R_analysis/Pictures_Sampling/4.png"
 
 # Display pictures
-include graphics(img1 path)
-include graphics(img2 path)
-include graphics(img3 path)
-include graphics(img4 path)
-include graphics(img5 path)
-include graphics(img6 path)
+include_graphics(img1_path) 
+include_graphics(img2_path) 
+include_graphics(img3_path) 
+include_graphics(img4_path) 
+include_graphics(img5_path) 
+include_graphics(img6_path) 
 ```
 
 ![Image description](1.jpg)
@@ -477,20 +467,20 @@ Five different types of properties:
 
 ```{r}
 # Upload raster data
-GF Elevation <- raster(”GF Elevation.tif”)
-GF Orientation <- raster(”GF Orientation.tif”)
-GF ECa1 <- raster(”GF CEa1.tif”)
-GF ECa2 <- raster(”GF CEa2.tif”)
+GF_Elevation     <- raster("GF_Elevation.tif")
+GF_Orientation   <- raster("GF_Orientation.tif")
+GF_ECa1          <- raster("GF_CEa1.tif")
+GF_ECa2          <- raster("GF_CEa2.tif")
 
-# Convert to point-based (vectorial) data
-GF Elevation dots <- rasterToPoints(GF Elevation, spatial = TRUE) %>% st as sf()
-names(GF Elevation dots)[names(GF Elevation dots) == ”GF Elevation”] <- ”Elevation”
-GF Orientation dots <- rasterToPoints(GF Orientation, spatial = TRUE) %>% st as sf()
-names(GF Orientation dots)[names(GF Orientation dots) == ”GF Orientation”] <- ”Orientation”
-GF ECa1 dots <- rasterToPoints(GF ECa1, spatial = TRUE) %>% st as sf()
-names(GF ECa1 dots)[names(GF ECa1 dots) == ”GF CEa1”] <- ”ECa1”
-GF ECa2 dots <- rasterToPoints(GF ECa2, spatial = TRUE) %>% st as sf()
-names(GF ECa2 dots)[names(GF ECa2 dots) == ”GF CEa2”] <- ”ECa2”
+# Convert to point vectorial data
+GF_Elevation_dots <- rasterToPoints(GF_Elevation, spatial = TRUE) %>% st_as_sf()
+names(GF_Elevation_dots)[names(GF_Elevation_dots) == "GF_Elevation"] <- "Elevation"
+GF_Orientation_dots <- rasterToPoints(GF_Orientation, spatial = TRUE) %>% st_as_sf()
+names(GF_Orientation_dots)[names(GF_Orientation_dots) == "GF_Orientation"] <- "Orientation"
+GF_ECa1_dots <- rasterToPoints(GF_ECa1, spatial = TRUE) %>% st_as_sf()
+names(GF_ECa1_dots)[names(GF_ECa1_dots) == "GF_CEa1"] <- "ECa1"
+GF_ECa2_dots <- rasterToPoints(GF_ECa2, spatial = TRUE) %>% st_as_sf()
+names(GF_ECa2_dots)[names(GF_ECa2_dots) == "GF_CEa2"] <- "ECa2"
 ```
 
 ### 3.3 Join field data and NDVI data on a single shapefile
@@ -501,32 +491,30 @@ and chemical data (pH).
 
 ```{r}
 # Start spatial join (NDVI + Elevation + Orientation + ECa)
-rm(MZ joined)
+rm(MZ_joined)
 
-MZ joined = st join(NDVI vector 19.04.2018, NDVI vector 07.05.2018[”NDVI 07.05.2018”],
-join = st nearest feature)
-
-MZ joined = st join(MZ joined, NDVI vector 14.05.2018[”NDVI 14.05.2018”], join = st nearest feature)
-MZ joined = st join(MZ joined, NDVI vector 16.06.2018[”NDVI 16.06.2018”], join = st nearest feature)
-MZ joined = st join(MZ joined, NDVI vector 04.04.2019[”NDVI 04.04.2019”], join = st nearest feature)
-MZ joined = st join(MZ joined, NDVI vector 14.04.2019[”NDVI 14.04.2019”], join = st nearest feature)
-MZ joined = st join(MZ joined, NDVI vector 27.04.2019[”NDVI 27.04.2019”], join = st nearest feature)
-MZ joined = st join(MZ joined, NDVI vector 14.05.2019[”NDVI 14.05.2019”], join = st nearest feature)
-MZ joined = st join(MZ joined, GF Elevation dots[”Elevation”], join = st nearest feature)
-MZ joined = st join(MZ joined, GF Orientation dots[”Orientation”], join = st nearest feature)
-MZ joined = st join(MZ joined, GF ECa1 dots[”ECa1”], join = st nearest feature)
-MZ joined = st join(MZ joined, GF ECa2 dots[”ECa2”], join = st nearest feature)
+MZ_joined = st_join(NDVI_vector_19.04.2018, NDVI_vector_07.05.2018["NDVI_07.05.2018"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_14.05.2018["NDVI_14.05.2018"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_16.06.2018["NDVI_16.06.2018"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_04.04.2019["NDVI_04.04.2019"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_14.04.2019["NDVI_14.04.2019"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_27.04.2019["NDVI_27.04.2019"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, NDVI_vector_14.05.2019["NDVI_14.05.2019"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, GF_Elevation_dots["Elevation"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, GF_Orientation_dots["Orientation"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, GF_ECa1_dots["ECa1"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, GF_ECa2_dots["ECa2"], join = st_nearest_feature)
 
 # Convert Eca from mS/m to dS/m and estimate ECa mean
-MZ joined$ECa1 <- MZ joined$ECa1/100
-MZ joined$ECa2 <- MZ joined$ECa2/100
-MZ joined$EC mean <- ((MZ joined$ECa1+MZ joined$ECa2)/2)
+MZ_joined$ECa1     <- MZ_joined$ECa1/100
+MZ_joined$ECa2     <- MZ_joined$ECa2/100
+MZ_joined$EC_mean  <- ((MZ_joined$ECa1+MZ_joined$ECa2)/2)
 
-# A simple classification of soil texture based on ECa proposed by Greenfields: http://www.greenfield.agrodrone.es/
-MZ joined$Texture <- ”Clay loamy”
-MZ joined$Texture[MZ joined$ECa2 > 0.60] <- ”Clay”
-MZ joined$Texture[MZ joined$ECa1 < 0.10] <- ”Clay loamy”
-tm shape(MZ joined) + tm dots(col = ”Texture”, palette = ”RdYlGn”, n=2) + tm style(”cobalt”)
+# A simple classification of soil texture proposed by Greenfields: http://www.greenfield.agrodrone.es/ 
+MZ_joined$Texture  <- "Clay_loamy"
+MZ_joined$Texture[MZ_joined$ECa2 > 0.60]  <- "Clay"
+MZ_joined$Texture[MZ_joined$ECa1 < 0.10]  <- "Clay_loamy"
+tm_shape(MZ_joined) + tm_dots(col = "Texture", palette = "RdYlGn", n=2) + tm_style("cobalt"))
 ```
 ![Image description](Texture_map.png)
 
@@ -538,44 +526,50 @@ maps with the same spatial resolution of MZ joined (10x10m).
 
 ```{r}
 # Upload sampling dots
-Sampling vector <- st read(”Sampling dots.shp”)
-Sampling map <- tm shape(Sampling vector) + tm dots(col = ”green”) + tm style(”cobalt”)
-Sampling map
+Sampling_vector <- st_read("Sampling_dots.shp")
+Sampling_map    <- tm_shape(Sampling_vector) + tm_dots(col = "green", palette = "RdYlGn", n=6) + tm_style("cobalt")
+Sampling_map  
+
 # Rename: translating from Spanish to English
-names(Sampling vector)[names(Sampling vector) == ”ARCILLA”] <- ”Clay”
-names(Sampling vector)[names(Sampling vector) == ”PH”] <- ”pH”
-names(Sampling vector)[names(Sampling vector) == ”ARENA”] <- ”Sand”
+names(Sampling_vector)[names(Sampling_vector) == "ARCILLA"] <- "Clay"
+names(Sampling_vector)[names(Sampling_vector) == "PH"] <- "pH"
+names(Sampling_vector)[names(Sampling_vector) == "ARENA"] <- "Sand"
 ```
 
 ![Image description](Sampling_points.jpg)
 
 ```{r}
 # A few sampling photos
-# Define file path
-img7 path <- ”sentinel/R analysis/Pictures Sampling/7.png”
-img8 path <- ”sentinel/R analysis/Pictures Sampling/8.png”
+img7_path <- "sentinel/R_analysis/Pictures_Sampling/7.png"
+img8_path <- "sentinel/R_analysis/Pictures_Sampling/8.png"
+
 # Display pictures
-include graphics(img7 path)
-include graphics(img8 path)
-Here we interpolate sampling data by applying a spatial join through ’st nearest feature’.
+include_graphics(img7_path) 
+include_graphics(img8_path) 
+
 ```
 
 ![Image description](7.jpg)
 ![Image description](8.jpg)
 
+Here we interpolate sampling data by applying a spatial join through ’st nearest feature’.
+
 ```{r}
 # Spatial join
-MZ joined = st join(MZ joined, Sampling vector[”Clay”], join = st nearest feature)
-MZ joined = st join(MZ joined, Sampling vector[”pH”], join = st nearest feature)
-MZ joined = st join(MZ joined, Sampling vector[”Sand”], join = st nearest feature)
+MZ_joined = st_join(MZ_joined, Sampling_vector["Clay"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, Sampling_vector["pH"], join = st_nearest_feature)
+MZ_joined = st_join(MZ_joined, Sampling_vector["Sand"], join = st_nearest_feature)
 
 # Map sampling points
-Clay map <- tm shape(MZ joined) + tm dots(col = ”Clay”, palette = ”YlOrBr”, n=8) + tm style(”cobalt”)
-Sand map <- tm shape(MZ joined) + tm dots(col = ”Sand”, palette = ”Oranges”, n=8) + tm style(”cobalt”)
-pH map <- tm shape(MZ joined) + tm dots(col = ”pH”, palette = ”Purples”, n=8) + tm style(”cobalt”)
+Clay_map <- tm_shape(MZ_joined) + tm_dots(col = "Clay", palette = "YlOrBr", n=8) + tm_style("cobalt") 
+Sand_map <- tm_shape(MZ_joined) + tm_dots(col = "Sand", palette = "Oranges", n=8) + tm_style("cobalt") 
+pH_map   <- tm_shape(MZ_joined) + tm_dots(col = "pH", palette = "Purples", n=8) + tm_style("cobalt")
 
-# Display facets
-tmap arrange(Clay map, Sand map, pH map, ncol=3)
+# Display
+tmap_arrange(Clay_map,
+             Sand_map,
+             pH_map,
+             ncol=3)
 ```
 ![Image description](Sampling_maps.jpg)
 
@@ -584,26 +578,27 @@ from 40 to 52% and sandy content from 10 to 26%. We don’t expect texture to be
 of crop spatial heterogeneity. Therefore, we focused mostly on topography.
 
 ```{r}
-# Estimate CV cv Clay = cv(MZ joined$Clay)
-cv Sand = cv(MZ joined$Sand)
-cv pH = cv(MZ joined$pH)
-cv ECa1 = cv(MZ joined$ECa1)
-cv ECa2 = cv(MZ joined$ECa2)
-cv O = cv(MZ joined$Orientation)
-cv E = cv(MZ joined$Elevation)
-cv NDVI 2018 = cv(MZ joined$NDVI 07.05.2018)
-cv NDVI 2019 = cv(MZ joined$NDVI 14.04.2019)
+# Estimate CV
+cv_Clay      = cv(MZ_joined$Clay)
+cv_Sand      = cv(MZ_joined$Sand)
+cv_pH        = cv(MZ_joined$pH)
+cv_ECa1      = cv(MZ_joined$ECa1)
+cv_ECa2      = cv(MZ_joined$ECa2)
+cv_O         = cv(MZ_joined$Orientation)
+cv_E         = cv(MZ_joined$Elevation)
+cv_NDVI_2018 = cv(MZ_joined$NDVI_07.05.2018)
+cv_NDVI_2019 = cv(MZ_joined$NDVI_14.04.2019)
 
-# Print results:
-cv Clay = 6.65 %;
-cv Sand = 25.97 % ;
-cv pH = 3.32 % ;
-cv ECa1 = 39.36 % ;
-cv ECa2 = 26.76 % ;
-cv O = 61.79 % ;
-cv E = 4.86 % ;
-cv NDVI 2018 = 11.79 % ;
-cv NDVI 2019 = 13.12 %
+# Print results
+# cv_Clay = 6.65 %
+# cv_Sand = 25.97 %
+# cv_pH = 3.32 %
+# cv_ECa1 = 39.36 %
+# cv_ECa2 = 26.76 %
+# cv_O = 61.79 %
+# cv_E = 4.86 %
+# cv_NDVI_2018 = 11.79 %
+# cv_NDVI_2019 = 13.12 %
 
 # Apparently the most variable properties are % Sand, ECa and orientation; but be careful when interpreting ’cv’ of
 spatial data; orientation for instance, which has the largest cv is expressed in degrees, which means that values close
@@ -623,13 +618,22 @@ the most important and correlated variables. A PCA does not discard any samples 
 components (PC).
 
 ```{r}
-MZ joined$ID <- seq.int(nrow(MZ joined))
-dataframe = fortify(MZ joined)
+MZ_joined$ndvi_2018 <- ((MZ_joined$NDVI_07.05.2018 + MZ_joined$NDVI_14.05.2018 + MZ_joined$NDVI_19.04.2018) / 3)
+MZ_joined$ndvi_2019 <- ((MZ_joined$NDVI_04.04.2019 + MZ_joined$NDVI_04.04.2019 + MZ_joined$NDVI_27.04.2019) / 3)
+MZ_joined$ndvi      <- ((MZ_joined$ndvi_2018 + MZ_joined$ndvi_2019) / 2)
+
+MZ_joined$ID <- seq.int(nrow(MZ_joined))
+dataframe = fortify(MZ_joined)
 dataframe$geometry <- NULL
-dataframe <- dataframe[c(1:12,15:17,20)]
+
+dataframe <- dataframe[,c(1:12,15:21)]
+#dataframe <- dataframe[c(1:12,15:17,20,22,24,25)]
 data.pca <- prcomp(dataframe[,c(1:15)], scale = TRUE)
+#data.pca <- prcomp(dataframe[,c(9:15,17:19)], scale = TRUE)
 summary(data.pca)
-autoplot(data.pca, colour = ’white’, loadings = TRUE, loadings.label = TRUE, loadings.label.size = 3.5)
+autoplot(data.pca, colour = 'white', loadings = TRUE, loadings.label = TRUE, loadings.label.size  = 5)
+
+data.pca$rotation
 ```
 ![Image description](PCA_autoplot.jpg)
 
@@ -649,37 +653,37 @@ associated to the year conditions than to the crop species. Let’s confirm it b
 # Import rainfall data for 2017/18 and 2018/19 (Data reported from October to September)
 rm(Rain)
 
-Rain <- read.csv(file=”Las300 Rainfall 2018 19.csv”, header=TRUE, sep=”,”)
+Rain <- read.csv(file=”Las300_Rainfall_2018_19.csv”, header=TRUE, sep=”,”)
 
 # Prepare plot
-rain 2018 <- subset(Rain, Year == 1)
-rain 2019 <- subset(Rain, Year == 2)
+rain_2018 <- subset(Rain, Year == 1)
+rain_2019 <- subset(Rain, Year == 2)
 
-graph r 2018 <- ggplot(rain 2018, aes(x=Month number, y=P)) + geom point(shape=21, size=2, stroke=1.5,
+graph_r_2018 <- ggplot(rain_2018, aes(x=Month number, y=P)) + geom_point(shape=21, size=2, stroke=1.5,
 fill=”darkslateblue”) + # Set static color and size for points
-geom line(col=”blue”) + scale colour brewer(palette = ”Set1”) + coord cartesian(xlim=c(1, 11.9), ylim=c(0, 300))
+geom_line(col=”blue”) + scale_colour_brewer(palette = ”Set1”) + coord_cartesian(xlim=c(1, 11.9), ylim=c(0, 300))
 + labs(title=”2018 Rainfall”, subtitle=”Monthly values”, y=”Precipitation (mm)”, x=”Month number (Month 1 =
 October 2017)”, caption=”Hydrologic Year from October - September”)
 
-graph r 2018
+graph_r_2018
 
 # Cumulative late winter and spring rainfall: 480.5 mm
-rain 2018$P[rain 2018$Month == ”February”] + rain 2018$P[rain 2018$Month == ”March”] +
-rain 2018$P[rain 2018$Month == ”April”]
+rain_2018$P[rain_2018$Month == ”February”] + rain_2018$P[rain_2018$Month == ”March”] +
+rain_2018$P[rain_2018$Month == ”April”]
 ```
 ![Image description](Rain2018.jpg)
 
 ```{r}
-graph r 2019 <- ggplot(rain 2019, aes(x=Month number, y=P)) + geom point(shape=21, size=2, stroke=1.5,
+graph_r_2019 <- ggplot(rain 2019, aes(x=Month number, y=P)) + geom_point(shape=21, size=2, stroke=1.5,
 fill=”darkslateblue”) +
-geom line(col=”blue”) + scale colour brewer(palette = ”Set1”) + coord cartesian(xlim=c(1, 11.9), ylim=c(0, 300))
+geom_line(col=”blue”) + scale_colour_brewer(palette = ”Set1”) + coord_cartesian(xlim=c(1, 11.9), ylim=c(0, 300))
 + labs(title=”2019 Rainfall”, subtitle=”Monthly values”, y=”Precipitation (mm)”, x=”Month number (Month 1 =
 October 2018)”, caption=”Hydrologic Year from October - September”)
 
-graph r 2019
+graph_r_2019
 
-rain 2019$P[rain 2019$Month == ”February”] + rain 2019$P[rain 2018$Month == ”March”] +
-rain 2019$P[rain 2019$Month == ”April”]
+rain_2019$P[rain_2019$Month == ”February”] + rain_2019$P[rain_2018$Month == ”March”] +
+rain_2019$P[rain_2019$Month == ”April”]
 
 # Cumulative rainfall (Feb-April 2019): 78 mm
 ```
@@ -698,20 +702,20 @@ most correlated dates for each year (according to the PCA).
 # upload RColor library
 library(RColorBrewer)
 
-MZ joined$ndvi 2018 <- ((MZ joined$NDVI 07.05.2018 + MZ joined$NDVI 14.05.2018 +
-MZ joined$NDVI 19.04.2018) / 3)
-MZ joined$ndvi 2019 <- ((MZ joined$NDVI 04.04.2019 + MZ joined$NDVI 04.04.2019 +
-MZ joined$NDVI 27.04.2019) / 3)
-MZ joined$ndvi <- ((MZ joined$ndvi 2018 + MZ joined$ndvi 2019) / 2)
+MZ_joined$ndvi_2018 <- ((MZ_joined$NDVI_07.05.2018 + MZ_joined$NDVI_14.05.2018 +
+MZ_joined$NDVI_19.04.2018) / 3)
+MZ_joined$ndvi_2019 <- ((MZ_joined$NDVI_04.04.2019 + MZ_joined$NDVI_04.04.2019 +
+MZ_joined$NDVI_27.04.2019) / 3)
+MZ_joined$ndvi <- ((MZ_joined$ndvi_2018 + MZ_joined$ndvi_2019) / 2)
 
 # With transparency and multiple x values
-g <- ggplot(MZ joined, aes(x = ndvi 2018, fill=”ndvi 2018”)) + geom density(position=”identity”, alpha=0.6)
-+ scale x continuous(name = ”Density plot of NDVI”, breaks = seq(0, 1, 0.2), limits=c(0.3, 1)) +
-scale y continuous(name = ”Density”) + ggtitle(”Density plot of mean NDVI”) + theme bw() + theme(plot.title
+g <- ggplot(MZ joined, aes(x = ndvi 2018, fill=”ndvi 2018”)) + geom_density(position=”identity”, alpha=0.6)
++ scale_x_continuous(name = ”Density plot of NDVI”, breaks = seq(0, 1, 0.2), limits=c(0.3, 1)) +
+scale_y_continuous(name = ”Density”) + ggtitle(”Density plot of mean NDVI”) + theme_bw() + theme(plot.title
 = element text(size = 14, family = ”Tahoma”, face = ”bold”), text = element text(size = 12, family = ”Tahoma”))
-g <- g + geom density(data=MZ joined, aes(x=ndvi 2019, fill=”ndvi 2019”), adjust=1.5, alpha=.4)
-g <- g + geom density(data=MZ joined, aes(x=ndvi, fill=”ndvi”), adjust=1.5, alpha=.4)
-g <- g + scale fill discrete(name=’Mean’,labels=c(”2018”, ”2019”, ”2018 + 2019”)) +
+g <- g + geom_density(data=MZ joined, aes(x=ndvi 2019, fill=”ndvi 2019”), adjust=1.5, alpha=.4)
+g <- g + geom_density(data=MZ joined, aes(x=ndvi, fill=”ndvi”), adjust=1.5, alpha=.4)
+g <- g + scale_fill_discrete(name=’Mean’,labels=c(”2018”, ”2019”, ”2018 + 2019”)) +
 scale fill brewer(palette=”Accent”)
 
 # Display plot
@@ -823,25 +827,25 @@ slope signal. Mathematically, this threshold is estimated by solving the zeros o
 derivative. 
 
 ```{r}
-ggplot(data, aes(x=Elevation, y=ndvi 2018)) + geom point(shape=21, size=2, stroke=1.5, fill=”darkslategray3”) +
-# Set static color and size for points geom smooth(method=”lm”, formula = y~poly(x,2,raw=T), col=”red”) + #
-change the color of line stat poly eq(formula = y~poly(x,2,raw=T), aes(label = paste(..eq.label.., ..rr.label.., sep =
-”~~~”)), parse = TRUE) + scale colour brewer(palette = ”Set1”) + coord cartesian(xlim=c(160, 200), ylim=c(0.3,
-1)) + geom vline(aes(xintercept=174.78), color=”blue”, linetype=”dashed”, size=1) + labs(title=”Elevation vs.
+ggplot(data, aes(x=Elevation, y=ndvi 2018)) + geom_point(shape=21, size=2, stroke=1.5, fill=”darkslategray3”) +
+# Set static color and size for points_geom_smooth(method=”lm”, formula = y~poly(x,2,raw=T), col=”red”) + #
+change the color of line stat_poly_eq(formula = y~poly(x,2,raw=T), aes(label = paste(..eq.label.., ..rr.label.., sep =
+”~~~”)), parse = TRUE) + scale_colour_brewer(palette = ”Set1”) + coord_cartesian(xlim=c(160, 200), ylim=c(0.3,
+1)) + geom_vline(aes(xintercept=174.78), color=”blue”, linetype=”dashed”, size=1) + labs(title=”Elevation vs.
 mean NDVI”, subtitle=”How does NDVI correlate to Elevation?”, y=”NDVI”, x=”Elevation (m)”, caption=”NDVI
 mean (9.5 ha)”)
 
-ggplot(data, aes(x=Elevation, y=ndvi 2019)) + geom point(shape=21, size=2, stroke=1.5, fill=”goldenrod”)
-+ # Set static color and size for points geom smooth(method=”lm”, formula = y~poly(x,2,raw=T),
-col=”red”) + # change the color of line stat poly eq(formula = y~poly(x,2,raw=T), aes(label =
-paste(..eq.label.., ..rr.label.., sep = ”~~~”)), parse = TRUE) + scale colour brewer(palette = ”Set1”) +
-geom vline(aes(xintercept=176.31), color=”blue”, linetype=”dashed”, size=1) + coord cartesian(xlim=c(160, 200),
+ggplot(data, aes(x=Elevation, y=ndvi 2019)) + geom_point(shape=21, size=2, stroke=1.5, fill=”goldenrod”)
++ # Set static color and size for points_geom_smooth(method=”lm”, formula = y~poly(x,2,raw=T),
+col=”red”) + # change the color of line stat_poly_eq(formula = y~poly(x,2,raw=T), aes(label =
+paste(..eq.label.., ..rr.label.., sep = ”~~~”)), parse = TRUE) + scale_colour_brewer(palette = ”Set1”) +
+geom_vline(aes(xintercept=176.31), color=”blue”, linetype=”dashed”, size=1) + coord_cartesian(xlim=c(160, 200),
 ylim=c(0.3, 1)) + labs(title=”Elevation vs. mean NDVI”, subtitle=”How does NDVI correlate to Elevation?”,
 y=”NDVI”, x=”Elevation (m)”, caption=”NDVI mean (9.5 ha)”)
 
-ggplot(data, aes(x=ECa2, y=ndvi)) + geom point(shape=21, size=2, stroke=1.5, fill=”dodgerblue”) + # Set static
-color and size for points geom smooth(method=”lm”, formula = y~x, col=”red”) + stat poly eq(formula = y~x,
-aes(label = paste(..eq.label.., ..rr.label.., sep = ”~~~”)), parse = TRUE) + scale colour brewer(palette = ”Set1”)
+ggplot(data, aes(x=ECa2, y=ndvi)) + geom_point(shape=21, size=2, stroke=1.5, fill=”dodgerblue”) + # Set static
+color and size for points_geom_smooth(method=”lm”, formula = y~x, col=”red”) + stat_poly_eq(formula = y~x,
+aes(label = paste(..eq.label.., ..rr.label.., sep = ”~~~”)), parse = TRUE) + scale_colour_brewer(palette = ”Set1”)
 + coord cartesian(xlim=c(0.3, 1.25), ylim=c(0.3, 1)) + labs(title=”Eca vs. mean NDVI”, subtitle=”How does NDVI
 correlate to ECa?”, y=”NDVI”, x=”Deep Eca (dS/m)”, caption=”NDVI mean (9.5 ha)”)
 
@@ -921,14 +925,14 @@ mergedata$ZONE[mergedata$ZONE == ”4”] <- ”D”
 mycols <- c(”#3CB371”, ”#7B68EE”, ”#FFA07A”, ”#FFD700”)
 
 # Prepare maps
-map MZ <- tm shape(mergedata) + tm dots(col = ”ZONE”, palette = ”mycols”, n=5) + tm style(”cobalt”)
-map Elevation <- tm shape(mergedata) + tm dots(col = ”Elevation”, palette = ”Spectral”, n=5) +
-tm style(”cobalt”)
-map ECa <- tm shape(mergedata) + tm dots(col = ”ECa2”, palette = ”Reds”, n=5) + tm style(”cobalt”)
-map NDVI <- tm shape(mergedata) + tm dots(col = ”NDVI mean”, palette = ”YlGn”, n=5) + tm style(”cobalt”)
+map_MZ <- tm_shape(mergedata) + tm_dots(col = ”ZONE”, palette = ”mycols”, n=5) + tm_style(”cobalt”)
+map_Elevation <- tm_shape(mergedata) + tm_dots(col = ”Elevation”, palette = ”Spectral”, n=5) +
+tm_style(”cobalt”)
+map_ECa <- tm shape(mergedata) + tm_dots(col = ”ECa2”, palette = ”Reds”, n=5) + tm_style(”cobalt”)
+map_NDVI <- tm_shape(mergedata) + tm_dots(col = ”NDVI_mean”, palette = ”YlGn”, n=5) + tm_style(”cobalt”)
 
 # Display facets
-tmap arrange(map MZ, map Elevation, map ECa, map NDVI, ncol=4)
+tmap_arrange(map_MZ, map_Elevation, map_ECa, map_NDVI, ncol=4)
 ```
 ![Image description](Cluster_map.jpg)
 ### 4.4 Representative points for sampling
@@ -941,24 +945,24 @@ ranges of values from density plots for each management zone.
 library(RColorBrewer)
 # stack density plot
 
-g <- ggplot(mergedata, aes(x = ECa2, fill=Zone)) + geom density(position=”identity”, alpha=0.6) +
-scale x continuous(name = ”Density plot of NDVI”, breaks = seq(0, 1, 0.2), limits=c(0.3, 1)) +
-scale y continuous(name = ”Density”) + ggtitle(”Density plot of mean NDVI”) + theme bw() + theme(plot.title
-= element text(size = 14, family = ”Tahoma”, face = ”bold”), text = element text(size = 12, family = ”Tahoma”))
+g <- ggplot(mergedata, aes(x = ECa2, fill=Zone)) + geom_density(position=”identity”, alpha=0.6) +
+scale_x_continuous(name = ”Density plot of NDVI”, breaks = seq(0, 1, 0.2), limits=c(0.3, 1)) +
+scale_y_continuous(name = ”Density”) + ggtitle(”Density plot of mean NDVI”) + theme_bw() + theme(plot.title
+= element_text(size = 14, family = ”Tahoma”, face = ”bold”), text = element text(size = 12, family = ”Tahoma”))
 
-g <- g + scale fill discrete(name=’ZONE’,labels=c(”A”, ”B”, ”C”, ”D”))
-g <- g + scale fill brewer(palette=”Accent”)
+g <- g + scale_fill_discrete(name=’ZONE’,labels=c(”A”, ”B”, ”C”, ”D”))
+g <- g + scale_fill_brewer(palette=”Accent”)
 
 # Vertical dashed lines - intervals of ECa to select representative points
 
-g <- g + geom vline(aes(xintercept=0.72), color=”gold2”, linetype=”dashed”, size=1) +
-geom vline(aes(xintercept=0.75), color=”gold2”, linetype=”dashed”, size=1)
-g <- g + geom vline(aes(xintercept=0.58), color=”darkorchid1”, linetype=”dashed”, size=1) +
-geom vline(aes(xintercept=0.63), color=”darkorchid1”, linetype=”dashed”, size=1)
-g <- g + geom vline(aes(xintercept=0.46), color=”forestgreen”, linetype=”dashed”, size=1) +
-geom vline(aes(xintercept=0.48), color=”forestgreen”, linetype=”dashed”, size=1)
-g <- g + geom vline(aes(xintercept=0.43), color=”darksalmon”, linetype=”dashed”, size=1) +
-geom vline(aes(xintercept=0.45), color=”darksalmon”, linetype=”dashed”, size=1)
+g <- g + geom_vline(aes(xintercept=0.72), color=”gold2”, linetype=”dashed”, size=1) +
+geom_vline(aes(xintercept=0.75), color=”gold2”, linetype=”dashed”, size=1)
+g <- g + geom_vline(aes(xintercept=0.58), color=”darkorchid1”, linetype=”dashed”, size=1) +
+geom_vline(aes(xintercept=0.63), color=”darkorchid1”, linetype=”dashed”, size=1)
+g <- g + geom_vline(aes(xintercept=0.46), color=”forestgreen”, linetype=”dashed”, size=1) +
+geom_vline(aes(xintercept=0.48), color=”forestgreen”, linetype=”dashed”, size=1)
+g <- g + geom_vline(aes(xintercept=0.43), color=”darksalmon”, linetype=”dashed”, size=1) +
+geom_vline(aes(xintercept=0.45), color=”darksalmon”, linetype=”dashed”, size=1)
 g
 ```
 ![Image description](DensityPlots_ECa_Zone.jpg)
@@ -981,13 +985,13 @@ mergedata$Probes[mergedata$ZONE == ”C” & mergedata$ECa2 > 0.43 & mergedata$E
 mergedata$Probes[mergedata$ZONE == ”D” & mergedata$ECa2 > 0.72 & mergedata$ECa2 0.75] <- ”D”
 
 mycols <- c(”3CB371”, ”7B68EE”, ”FFA07A”, ”FFD700”)
-map MZ <- tm shape(mergedata) + tm dots(col = ”ZONE”, palette = mycols, n=5) + tm style(”cobalt”)
+map_MZ <- tm_shape(mergedata) + tm_dots(col = ”ZONE”, palette = mycols, n=5) + tm_style(”cobalt”)
 
 mycols <- c(”F5F5F5”, ”3CB371”, ”7B68EE”, ”FFA07A”, ”FFD700”)
-map Probes <- tm shape(mergedata) + tm dots(col = ”Probes”, palette = mycols, n=5) + tm style(”cobalt”)
+map_Probes <- tm_shape(mergedata) + tm_dots(col = ”Probes”, palette = mycols, n=5) + tm_style(”cobalt”)
 
 # Display facets
-tmap arrange(map MZ, map Probes, ncol=2)
+tmap arrange(map_MZ, map_Probes, ncol=2)
 ```
 
 ![Image description](FinalMap.jpg)
