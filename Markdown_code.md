@@ -784,12 +784,32 @@ a maximum number of 3-4 measuring zones.
 Here we conduct an analysis with library(cluster) to check whether the amount of clusters considered
 is representative enough of our spatial variation.
 
-```
+```{r}
 # Upload library cluster
 library(cluster)
-# I will work with Elevation, ECa2 and the means of NDVI
-data <- dataframe[c(9,12,17:19)]
-fviz nbclust(dataframe, FUN = hcut, method = ”wss”)
+# I will work with Elevation, ECa2 and the means of NDVI 
+data <- dataframe[c(9,12,16:18)]
+data.scale <- scale(data[,c(1,2,3,4)])
+
+fviz_nbclust(data.scale, FUN = hcut, method = "wss")
+
+# Elbow method
+fviz_nbclust(data.scale, kmeans, method = "wss") +
+    geom_vline(xintercept = 4, linetype = 2)+
+  labs(subtitle = "Elbow method")
+
+# Silhouette method
+fviz_nbclust(data.scale, kmeans, method = "silhouette")+
+  labs(subtitle = "Silhouette method")
+
+# Gap statistic
+# nboot = 50 to keep the function speedy. 
+# recommended value: nboot= 500 for your analysis.
+# Use verbose = FALSE to hide computing progression.
+
+# Silhouette method
+fviz_nbclust(data.scale, kmeans, method = "gap_stat")+
+  labs(subtitle = "Gap Stat method")
 ```
 ![Image description](cluster_amount.jpg)
 
