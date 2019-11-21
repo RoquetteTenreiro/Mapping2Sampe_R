@@ -91,9 +91,8 @@ data is saved. To run this code please specify the working directory where your 
 ```{r}
 rm(list=ls())
 getwd()
-knitr::opts chunk$set(echo = TRUE)
-knitr::opts knit$set(root.dir =
-”C:/Users/Tomas R. Tenreiro/Desktop/Experimental Catchment Cordoba 19 20” )
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "C:/Users/Tomas R. Tenreiro/Desktop/Experimental_Catchment_Cordoba_19_20")
 ```
 
 ### 1.5 Input material
