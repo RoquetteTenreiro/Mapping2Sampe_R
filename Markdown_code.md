@@ -30,7 +30,7 @@ R. The reader can use this document both as a dissemination and a decision suppo
 
 The first step consists on updating all necessary libraries for this analysis.
 
-```
+```{r}
 install.packages(”rmarkdown”)
 install.packages(”dplyr”)
 install.packages(”plyr”)
@@ -56,7 +56,7 @@ install.packages(”tinytex”)
 ```
 
 The second step consists on calling all libraries to the script.
-```
+```{r}
 library(knitr)
 library(sf)
 library(dplyr)
@@ -88,7 +88,7 @@ In this section we set initial details to specify the working directory; in this
 was linked to the internal folder "Experimental Catchment Cordoba 19 20" where input and output
 data is saved. To run this code please specify the working directory where your input files are saved.
 
-```
+```{r}
 rm(list=ls())
 getwd()
 knitr::opts chunk$set(echo = TRUE)
@@ -106,7 +106,7 @@ properties under rain-fed conditions, we focused on late phenological stages bef
 First year imagery corresponds to a winter wheat crop and second year imagery corresponds to a
 rapeseed crop.
 
-```
+```{r}
 # Date 1
 Sentinel Red 19.04.2018 <- raster(”sentinel/R analysis/Sentinel Red 19.04.2018.tiff”)
 Sentinel NIR 19.04.2018 <- raster(”sentinel/R analysis/Sentinel NIR 19.04.2018.tiff”)
@@ -140,7 +140,7 @@ Sentinel NIR 14.05.2019 <- raster(”sentinel/R analysis/Sentinel NIR 14.05.2019
 This section estimates NDVI considering that Satellite B4 corresponds to Red wave length and B8
 to NIR wave length. Data is in raster format with a spatial resolution of 10x10 m.
 
-```
+```{r}
 # NDVI 2018
 Sentinel NDVI 19.04.2018 <- (Sentinel NIR 19.04.2018 - Sentinel Red 19.04.2018) / (Sentinel NIR 19.04.2018 +
 Sentinel Red 19.04.2018)
@@ -167,7 +167,7 @@ Sentinel Red 14.05.2019)
 Here we use ’tm shape’ function applied to raster data (tm raster). It is important to confirm we
 have uploaded the library ’tmap’.
 
-```
+```{r}
 # Map NDVI 2018
 NDVI 19.04.2018 <- tm shape(Sentinel NDVI 19.04.2018) + tm raster(palette=”YlGn”,n=5) + tm legend(outside
 = TRUE, text.size = 1.2)
@@ -195,14 +195,14 @@ First for 2018:
 
 Note: ”ncol” means the number of columns up to a maximum limit of 4 features.
 
-```
+```{r}
 tmap arrange(NDVI 19.04.2018, NDVI 07.05.2018, NDVI 14.05.2018, NDVI 16.06.2018, nncol=2)
 ```
 ![Image description](satNDVI_1.jpg)
 
 Second for 2019:
 
-```
+```{r}
 tmap arrange(NDVI 04.04.2019, NDVI 14.04.2019, NDVI 27.04.2019, NDVI 14.05.2019, ncol=2)
 ```
 ![Image description](satNDVI_2.jpg)
@@ -217,7 +217,7 @@ orientation in a particular area of interest from a DEM. We used a DEM with 5m s
 obtained with LiDAR from CNIG ( http://centrodedescargas.cnig.es/CentroDescargas /index.jsp ).
 A catchment was isolated with an area of approximately 9.5 ha.
 
-```
+```{r}
 # Upload field vector
 field vector <- st read(”sentinel/R analysis/Field vector.shp”)
 ```
@@ -225,7 +225,7 @@ field vector <- st read(”sentinel/R analysis/Field vector.shp”)
 In this step it is also important to check whether the coordinate system is the same as the satellite
 imagery; in this particular case we will work with the system WGS84 EPSG 4326.
 
-```
+```{r}
 # Check coordinate system
 crs(field vector)
 crs(Sentinel NDVI 27.04.2019) # as an example to check coordinate system of rasters
@@ -237,7 +237,7 @@ In the following section the script crops and masks the NDVI maps by the field v
 For more info about these functions please check the outcome and have a look at the following link
 https://rpubs.com/ricardo ochoa/416711
 
-```
+```{r}
 # Crop NDVI data 2018
 cropped feature 1 = crop(Sentinel NDVI 19.04.2018, field vector)
 plot (cropped feature 1)
@@ -288,14 +288,14 @@ Here we switch to an interactive viewing mode of the outcomes (please run this s
 to check zooming options). If you want to get back to the ”static” mode please switch ’view’ by
 ’plot’ in the function term ’tmap mode()’.
 
-```
+```{r}
 tmap mode(”view”)
 # or tmap mode(”plot”) instead
 ```
 
 ### 2.7 Interactive mapping of masked NDVI rasters
 
-```
+```{r}
 # For 2018
 masked 1 <- tm shape(masked feature 1) + tm raster(palette=”YlGn”,n=10, title=”NDVI 19.04.2018”) +
 tm legend(outside = TRUE, text.size = 1.2)
@@ -321,7 +321,7 @@ tm legend(outside = TRUE, text.size = 1.2)
 
 It is possible to zoom each facet separately in R-studio and move the corresponding maps.
 
-```
+```{r}
 tmap arrange(masked 1, masked 2, masked 3, masked 4, ncol=2)
 ```
 
@@ -329,7 +329,7 @@ tmap arrange(masked 1, masked 2, masked 3, masked 4, ncol=2)
 
 ### 2.9 Print NDVI masked map for 2019
 
-```
+```{r}
 tmap arrange(masked 5, masked 6, masked 7, masked 8, ncol=2)
 ```
 
@@ -343,7 +343,7 @@ resolution (10x10m);
 
 2) Use of ’tmap arrange’ to display facets for NDVI vectorial mapping (2018).
 
-```
+```{r}
 # From raster to point
 NDVI vector 19.04.2018 <- rasterToPoints(masked feature 1, spatial = TRUE) %>% st as sf()
 NDVI vector 07.05.2018 <- rasterToPoints(masked feature 2, spatial = TRUE) %>% st as sf()
@@ -383,7 +383,7 @@ resolution (10x10m);
 
 2) Use of ’tmap arrange’ to display facets for NDVI vectorial mapping (2019).
 
-```
+```{r}
 # From raster to point
 NDVI vector 04.04.2019 <- rasterToPoints(masked feature 5, spatial = TRUE) %>% st as sf()
 NDVI vector 14.04.2019 <- rasterToPoints(masked feature 6, spatial = TRUE) %>% st as sf()
@@ -430,7 +430,7 @@ Society of America Journal, 65(6), 1829-1837.
 (2006). Effect of soil water on apparent soil electrical conductivity and texture relationships in a
 dryland field. Biosystems Engineering, 94(1), 19-32.
 
-```
+```{r}
 # Upload libraries ’imager’ and ’png’
 library(knitr) # For knitting document and include graphics function
 library(ggplot2) # For plotting
@@ -476,7 +476,7 @@ Five different types of properties:
 
 5) Soil pH;
 
-```
+```{r}
 # Upload raster data
 GF Elevation <- raster(”GF Elevation.tif”)
 GF Orientation <- raster(”GF Orientation.tif”)
@@ -500,7 +500,7 @@ Here we run a spatial join in order to build a single shapefile containing point
 with plant vigor (represented by NDVI), soil physical properties (elevation, orientation, ECa, texture)
 and chemical data (pH).
 
-```
+```{r}
 # Start spatial join (NDVI + Elevation + Orientation + ECa)
 rm(MZ joined)
 
@@ -537,7 +537,7 @@ A total of 10 soil samples were collected at 30-40cm according to the spatial pa
 spatially interpolated following a ’nearest-feature’ algorithm in order to produce point based vectorial
 maps with the same spatial resolution of MZ joined (10x10m).
 
-```
+```{r}
 # Upload sampling dots
 Sampling vector <- st read(”Sampling dots.shp”)
 Sampling map <- tm shape(Sampling vector) + tm dots(col = ”green”) + tm style(”cobalt”)
@@ -550,7 +550,7 @@ names(Sampling vector)[names(Sampling vector) == ”ARENA”] <- ”Sand”
 
 ![Image description](Sampling_points.jpg)
 
-```
+```{r}
 # A few sampling photos
 # Define file path
 img7 path <- ”sentinel/R analysis/Pictures Sampling/7.png”
@@ -564,7 +564,7 @@ Here we interpolate sampling data by applying a spatial join through ’st neare
 ![Image description](7.jpg)
 ![Image description](8.jpg)
 
-```
+```{r}
 # Spatial join
 MZ joined = st join(MZ joined, Sampling vector[”Clay”], join = st nearest feature)
 MZ joined = st join(MZ joined, Sampling vector[”pH”], join = st nearest feature)
@@ -584,7 +584,7 @@ The field is characterized by a lower variation of clay and sandy content. Clay 
 from 40 to 52% and sandy content from 10 to 26%. We don’t expect texture to be a major driver
 of crop spatial heterogeneity. Therefore, we focused mostly on topography.
 
-```
+```{r}
 # Estimate CV cv Clay = cv(MZ joined$Clay)
 cv Sand = cv(MZ joined$Sand)
 cv pH = cv(MZ joined$pH)
@@ -623,7 +623,7 @@ the most important and correlated variables. A PCA does not discard any samples 
 (variables). Instead, it reduces the overwhelming number of dimensions by constructing principal
 components (PC).
 
-```
+```{r}
 MZ joined$ID <- seq.int(nrow(MZ joined))
 dataframe = fortify(MZ joined)
 dataframe$geometry <- NULL
@@ -646,7 +646,7 @@ NDVI than ECa2 (in PC2 as well). The correlation is positive in 2019 and negativ
 general, we may note a complete contrast between 2018 and 2019 imagery that is likely to be more
 associated to the year conditions than to the crop species. Let’s confirm it by considering the annual distribution of rainfall for each year.
 
-```
+```{r}
 # Import rainfall data for 2017/18 and 2018/19 (Data reported from October to September)
 rm(Rain)
 
@@ -670,7 +670,7 @@ rain 2018$P[rain 2018$Month == ”April”]
 ```
 ![Image description](Rain2018.jpg)
 
-```
+```{r}
 graph r 2019 <- ggplot(rain 2019, aes(x=Month number, y=P)) + geom point(shape=21, size=2, stroke=1.5,
 fill=”darkslateblue”) +
 geom line(col=”blue”) + scale colour brewer(palette = ”Set1”) + coord cartesian(xlim=c(1, 11.9), ylim=c(0, 300))
@@ -695,7 +695,7 @@ for a winter wheat crop and the historical wheat data is less affected by stress
 sown in 2019. So let’s have a look at the density plots for means of NDVI, considering the three
 most correlated dates for each year (according to the PCA).
 
-```
+```{r}
 # upload RColor library
 library(RColorBrewer)
 
@@ -722,7 +722,7 @@ g
 ![Image description](Density_plot_NDVI.jpg)
 
 
-```
+```{r}
 MZ joined$ID <- seq.int(nrow(MZ joined))
 dataframe = fortify(MZ joined)
 dataframe$geometry <- NULL
@@ -733,7 +733,7 @@ autoplot(data.pca, colour = ’white’, loadings = TRUE, loadings.label = TRUE,
 ```
 ![Image description](PCA_autoplot_means.jpg)
 
-```
+```{r}
 # To check PC scores
 data.pca$rotation
 ```
@@ -803,11 +803,6 @@ fviz_nbclust(data.scale, kmeans, method = "silhouette")+
   labs(subtitle = "Silhouette method")
 
 # Gap statistic
-# nboot = 50 to keep the function speedy. 
-# recommended value: nboot= 500 for your analysis.
-# Use verbose = FALSE to hide computing progression.
-
-# Silhouette method
 fviz_nbclust(data.scale, kmeans, method = "gap_stat")+
   labs(subtitle = "Gap Stat method")
 ```
@@ -828,7 +823,7 @@ oder derivative equals zero) is obtained practically at the same elevation (175.
 slope signal. Mathematically, this threshold is estimated by solving the zeros of the first order
 derivative. 
 
-```
+```{r}
 ggplot(data, aes(x=Elevation, y=ndvi 2018)) + geom point(shape=21, size=2, stroke=1.5, fill=”darkslategray3”) +
 # Set static color and size for points geom smooth(method=”lm”, formula = y~poly(x,2,raw=T), col=”red”) + #
 change the color of line stat poly eq(formula = y~poly(x,2,raw=T), aes(label = paste(..eq.label.., ..rr.label.., sep =
@@ -886,7 +881,7 @@ For more information related to k-Means and scaling features, please check:
 
 - https://becominghuman.ai/demystifying-feature-scaling-baff53e9b3fd
 
-```
+```{r}
 library(cluster) # for clustering algorithms
 
 # Subset dataframe
@@ -908,7 +903,7 @@ fviz cluster(cluster, data = df.stand)
 Data is clustered according to the selected principal components and the ’df’ data frame is
 merged with the shapefile MZ joined by the attribute ID.
 
-```
+```{r}
 # Add clusters to spatial data
 rm(mergedata)
 mergedata <- merge(x = MZ joined, y = df, by = ”ID”)
@@ -943,7 +938,7 @@ Considering the correlation between ECa2 and NDVI, the selection of representati
 sampling is done through an analysis of ECa histograms. The idea is to select the most representative
 ranges of values from density plots for each management zone.
 
-```
+```{r}
 library(RColorBrewer)
 # stack density plot
 
@@ -978,7 +973,7 @@ take into account the farming traffic directions in order to minimize disturbanc
 2 will be installed in zone B, 2 in zone A locations and 3 probes in management zones C and D (all
 aligned with the tractor rows).
 
-```
+```{r}
 # Define sampling points
 mergedata$Probes <- ”0 NO Probe”
 mergedata$Probes[mergedata$ZONE == ”A” & mergedata$ECa2 > 0.46 & mergedata$ECa2 < 0.48] <- ”A”
