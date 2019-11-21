@@ -809,7 +809,7 @@ fviz_nbclust(data.scale, kmeans, method = "silhouette")+
 fviz_nbclust(data.scale, kmeans, method = "gap_stat")+
   labs(subtitle = "Gap Stat method")
 ```
-![Image description](cluster_amount.jpg)
+![Image description](cluster_amount_3Methods.jpg)
 
 The proposed amount of 3-4 zones seems representative enough since adding more classes would
 not low the total within sum of square of this classification.
